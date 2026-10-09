@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Escape Room Histórico: O Código do Tempo (12 Salas)</title>
+  <style>
+    :root {
+      --bg-color: #0d1117;
+      --card-bg: #161b22;
+      --accent: #e36049;
+      --text: #c9d1d9;
+      --border: #30363d;
+      --success: #2ea043;
+      --warning: #d29922;
+      --blue: #58a6ff;
+    }
+
+    * { box-sizing: border-box; font-family: 'Courier New', Courier, monospace; }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text);
+      margin: 0; padding: 20px;
+      display: flex; flex-direction: column; align-items: center;
+      min-height: 100vh;
+    }
+
+    header { text-align: center; margin-bottom: 20px; width: 100%; max-width: 900px; }
+
+    .status-bar {
+      display: flex; justify-content: space-between; align-items: center;
+      background: #21262d; padding: 15px 25px; border-radius: 8px;
+      border: 1px solid var(--border); margin-top: 15px; width: 100%;
+    }
+
+    .badge {
+      background: var(--blue); color: #0d1117;
+      padding: 5px 12px; border-radius: 20px; font-weight: bold; font-size: 0.9rem;
+    }
+
+    #timer { font-size: 1.8rem; font-weight: bold; color: var(--accent); }
+
+    .container {
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: 8px; padding: 30px; width: 100%; max-width: 900px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+    }
+
+    .room { display: none; }
+    .room.active { display: block; }
+
+    h2 { color: var(--blue); border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-top: 0; }
+
+    .question-block {
+      background: #0d1117; border: 1px solid var(--border);
+      padding: 18px; border-radius: 6px; margin: 20px 0;
+    }
+
+    .options label {
+      display: block; margin: 10px 0; background: #21262d;
+      padding: 12px; border-radius: 6px; cursor: pointer; border: 1px solid transparent;
+    }
+
+    .options label:hover { border-color: var(--blue); }
+
+    input[type="text"] {
+      width: 100%; padding: 12px; margin-top: 10px;
+      background: #161b22; border: 1px solid var(--border);
+      color: #fff; border-radius: 6px; font-size: 1rem;
+    }
+
+    button {
+      background-color: #238636; color: white; border: none;
+      padding: 14px 24px; font-size: 1.1rem; border-radius: 6px;
+      cursor: pointer; margin-top: 15px; width: 100%; font-weight: bold;
+    }
+
+    button:hover { background-color: #2ea043; }
+
+    .feedback { margin-top: 15px; padding: 12px; border-radius: 6px; display: none; }
+    .feedback.error {
+      display: block; background-color: rgba(248, 81, 73, 0.15);
+      border: 1px solid #f85149; color: #ff7b72;
+    }
+
+    .hint {
+      margin-top: 10px; padding: 10px; background: rgba(210, 153, 34, 0.15);
+      border: 1px solid var(--warning); color: #e3b341; border-radius: 6px; font-size: 0.9rem;
+    }
+
+    .tf-item { margin-bottom: 12px; }
+    .tf-item select {
+      background: #21262d; color: #fff; border: 1px solid var(--border);
+      padding: 6px; border-radius: 4px;
+    }
+
+    blockquote {
+      background: #21262d; border-left: 4px solid var(--blue);
+      margin: 10px 0; padding: 10px 15px; font-style: italic;
+    }
+
+    .level-up-modal {
+      display: none; text-align: center; background: #1c2128;
+      border: 2px solid var(--success); padding: 25px; border-radius: 8px; margin-top: 20px;
+    }
+
+    .level-up-modal h3 { color: var(--success); font-size: 1.8rem; margin: 0 0 10px 0; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>⌛ Operação Restauração Histórica (12 Salas)</h1>
+    <p>Decifre os enigmas das estruturas políticas, sociais e econômicas do Brasil desde a Pré-Colónia até a Era Vargas!</p>
+    
+    <div class="status-bar">
+      <div><strong>Progresso:</strong> <span id="current-level" class="badge">Sala 1 de 12 - Aprendiz</span></div>
+      <div>⏳ <span id="timer">60:00</span></div>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- TELA DE LEVEL UP -->
+    <div id="level-modal" class="level-up-modal">
+      <h3>🎉 PARABÉNS! VOCÊ AVANÇOU DE NÍVEL!</h3>
+      <p id="level-msg">O seu conhecimento sobre a formação social brasileira desbloqueou um novo setor do arquivo.</p>
+      <p><strong>Nova Conquista Desbloqueada:</strong> <span id="reward-title" style="color: var(--blue);"></span></p>
+      <button onclick="continueToNextRoom()">Avançar para a Próxima Sala ➔</button>
+    </div>
+
+    <!-- SALA 1: POVOS INDÍGENAS E O ESCAMBO -->
+    <div id="room-1" class="room active">
+      <h2>SALA 1: Sociedades Originárias e o Contato Inicial</h2>
+      <div class="question-block">
+        <p><strong>Desafio 1 (Múltipla Escolha):</strong> Sobre as sociedades indígenas brasileiras no século XVI e o contacto inicial com os portugueses, qual das opções traduz corretamente a relação económica do escambo e o impacto cultural?</p>
+        <div class="options">
+          <label><input type="radio" name="q1" value="A"> O escambo envolvia a troca do pau-brasil por moedas de ouro portuguesas, fortalecendo a economia monetária mercantil das tribos Tupi.</label>
+          <label><input type="radio" name="q1" value="B"> O escambo baseava-se na troca do trabalho indígena na extração do pau-brasil por objetos de metal e quinquilharias; em seguida, a tentativa de escravização gerou guerras de resistência e a Guerra Justa.</label>
+          <label><input type="radio" name="q1" value="C"> Os povos indígenas aderiram voluntariamente ao trabalho nas lavouras de açúcar porque viam a monarquia portuguesa como aliada natural contra os franceses.</label>
+        </div>
+      </div>
+      <button onclick="checkRoom1()">Submeter Resposta da Sala 1</button>
+      <div id="feedback-1" class="feedback"></div>
+    </div>
+
+    <!-- SALA 2: ESTRUTURA COLONIAL E AÇÚCAR (V/F) -->
+    <div id="room-2" class="room">
+      <h2>SALA 2: O Sistema Colonial e a Economia Açucareira</h2>
+      <p>Marque <strong>V</strong> para Verdadeiro e <strong>F</strong> para Falso:</p>
+      <div class="question-block">
+        <div class="tf-item">
+          <p>1. O modelo plantation colonial assentava-se no latifúndio, na monocultura para exportação e na mão de obra escravizada. <select id="tf1"><option value="">-</option><option value="V">V</option><option value="F">F</option></select></p>
+        </div>
+        <div class="tf-item">
+          <p>2. A Companhia das Índias Ocidentais holandesa invadiu Pernambuco no século XVII devido ao Pacto Colonial exclusivo com Espanha durante a União Ibérica. <select id="tf2"><option value="">-</option><option value="V">V</option><option value="F">F</option></select></p>
+        </div>
+        <div class="tf-item">
+          <p>3. Os Senhores de Engenho detinham apenas poder económico, sem qualquer interferência na política das Câmaras Municipais. <select id="tf3"><option value="">-</option><option value="V">V</option><option value="F">F</option></select></p>
+        </div>
+      </div>
+      <button onclick="checkRoom2()">Validar Sala 2</button>
+      <div id="feedback-2" class="feedback"></div>
+    </div>
+
+    <!-- SALA 3: A DIÁSPORA E OS NAVIOS NEGREIROS -->
+    <div id="room-3" class="room">
+      <h2>SALA 3: Rota Atlântica e o Tumbeiro</h2>
+      <div class="question-block">
+        <p><strong>Desafio de Decodificação:</strong> Qual é o nome do poeta abolicionista da Terceira Geração Romântica (Geração Condoreira) que denunciou os horrores das travessias nos navios negreiros na obra <em>"O Navio Negreiro"</em>?</p>
+        <input type="text" id="poet-input" placeholder="Digite o nome do poeta..." />
+      </div>
+      <button onclick="checkRoom3()">Validar Sala 3</button>
+      <div id="feedback-3" class="feedback"></div>
+    </div>
+
+    <!-- SALA 4: FORMAS DE RESISTÊNCIA E QUILOMBOS -->
+    <div id="room-4" class="room">
+      <h2>SALA 4: O Quilombo de Palmares e a Resistência</h2>
+      <div class="question-block">
+        <p><strong>Desafio 4 (Múltipla Escolha):</strong> O Quilombo dos Palmares (século XVII) representou a maior experiência de resistência ao sistema escravista nas Américas. Qual foi a estratégia utilizada pela Coroa e pelos engenhos para destruí-lo?</p>
+        <div class="options">
+          <label><input type="radio" name="q4" value="A"> Contratação de expedições bandeirantes de apresamento, lideradas por Domingos Jorge Velho.</label>
+          <label><input type="radio" name="q4" value="B"> Assinatura de um tratado de paz definitivo reconhecendo a independência de Palmares sob o comando de Zumbi.</label>
+          <label><input type="radio" name="q4" value="C"> Envio de tropas britânicas para garantir o fornecimento de mão de obra para a mineração.</label>
+        </div>
+      </div>
+      <button onclick="checkRoom4()">Submeter Resposta da Sala 4</button>
+      <div id="feedback-4" class="feedback"></div>
+    </div>
+
+    <!-- SALA 5: MINERAÇÃO E A REGULAMENTAÇÃO FISCAL -->
+    <div id="room-5" class="room">
+      <h2>SALA 5: O Século do Ouro e a Cobrança do Quinto</h2>
+      <div class="question-block">
+        <p><strong>Desafio 5 (Análise Fiscal):</strong> Como se chamava o imposto fixo de 100 arrobas de ouro anuais cobrado pela Coroa portuguesa que, quando não atingido, culminava na cobrança forçada sobre toda a população da região das minas?</p>
+        <input type="text" id="tax-input" placeholder="Digite o nome do imposto forçado..." />
+      </div>
+      <button onclick="checkRoom5()">Validar Sala 5</button>
+      <div id="feedback-5" class="feedback"></div>
+    </div>
+
+    <!-- SALA 6: LEIS ABOLICIONISTAS E GRADUALISMO -->
+    <div id="room-6" class="room">
+      <h2>SALA 6: O Gradualismo Abolicionista do Século XIX</h2>
+      <p>Ordene as Leis Abolicionistas brasileiras em <strong>ordem cronológica exata</strong> (da mais antiga para a mais recente) utilizando as siglas:</p>
+      <div class="question-block">
+        <ul>
+          <li><strong>[AUREA]</strong> Lei Áurea</li>
+          <li><strong>[EUSEBIO]</strong> Lei Eusébio de Queirós</li>
+          <li><strong>[SEXA]</strong> Lei dos Sexagenários (Saraiva-Cotegipe)</li>
+          <li><strong>[VENTRE]</strong> Lei do Ventre Livre</li>
+        </ul>
+        <p>Digite a sequência das siglas separadas por hífen (Ex: EUSEBIO-VENTRE-SEXA-AUREA):</p>
+        <input type="text" id="laws-input" placeholder="SIGLA-SIGLA-SIGLA-SIGLA" />
+      </div>
+      <button onclick="checkRoom6()">Validar Sala 6</button>
+      <div id="feedback-6" class="feedback"></div>
+    </div>
+
+    <!-- SALA 7: O PÓS-ABOLIÇÃO E O RACISMO ESTRUTURAL -->
+    <div id="room-7" class="room">
+      <h2>SALA 7: O Pós-Abolição e a Política de Branqueamento</h2>
+      <div class="question-block">
+        <p><strong>Desafio 7 (Múltipla Escolha):</strong> Após a assinatura da Lei Áurea em 1888, qual foi a política do Estado brasileiro em relação à população negra recém-liberta e à mão de obra?</p>
+        <div class="options">
+          <label><input type="radio" name="q7" value="A"> Doação de terras públicas para reforma agraria aos ex-escravizados e integração ao mercado assalariado.</label>
+          <label><input type="radio" name="q7" value="B"> Abandono do Estado sem indenização ou incentivos à população negra, combinado com a subvenção do Estado à imigração europeia (substituição de mão de obra e branqueamento).</label>
+          <label><input type="radio" name="q7" value="C"> Criação imediata de leis de cotas nas universidades para compensar os séculos de trabalho não remunerado.</label>
+        </div>
+      </div>
+      <button onclick="checkRoom7()">Submeter Resposta da Sala 7</button>
+      <div id="feedback-7" class="feedback"></div>
+    </div>
+
+    <!-- SALA 8: A REVOLUÇÃO DE 1930 E O FIM DA REPÚBLICA VELHA -->
+    <div id="room-8" class="room">
+      <h2>SALA 8: A Crise das Elites e o Surgimento da Era Vargas</h2>
+      <div class="question-block">
+        <p><strong>Desafio 8:</strong> Qual foi a aliança política regional liderada por Getúlio Vargas que contestou a vitória de Júlio Prestes nas eleições de 1930, culminando na Revolução de 1930?</p>
+        <input type="text" id="alliance-input" placeholder="Digite o nome da coligação política..." />
+      </div>
+      <button onclick="checkRoom8()">Validar Sala 8</button>
+      <div id="feedback-8" class="feedback"></div>
+    </div>
+
+    <!-- SALA 9: GOVERNO CONSTITUCIONAL E RADICALIZAÇÃO (1934-1937) -->
+    <div id="room-9" class="room">
+      <h2>SALA 9: A Polarization Política dos Anos 30</h2>
+      <p>Associe as ideologias atuantes durante o Governo Constitucional de Vargas. Marque <strong>V</strong> para Verdadeiro e <strong>F</strong> para Falso:</p>
+      <div class="question-block">
+        <div class="tf-item">
+          <p>1. A AIB (Ação Integralista Brasileira), liderada por Plínio Salgado, era de inspiração fascista e defendia o lema "Deus, Pátria e Família". <select id="tf_v1"><option value="">-</option><option value="V">V</option><option value="F">F</option></select></p>
+        </div>
+        <div class="tf-item">
+          <p>2. A ANL (Aliança Nacional Libertadora) apoiava o fascismo de Mussolini e defendia o envio de tropas brasileiras para apoiar a Alemanha. <select id="tf_v2"><option value="">-</option><option value="V">V</option><option value="F">F</option></select></p>
+        </div>
+        <div class="tf-item">
+          <p>3. A Intentona Comunista de 1935 serviu de pretexto para o Estado decretar Estado de Sítio e endurecer a repressão política. <select id="tf_v3"><option value="">-</option><option value="V">V</option><option value="F">F</option></select></p>
+        </div>
+      </div>
+      <button onclick="checkRoom9()">Validar Sala 9</button>
+      <div id="feedback-9" class="feedback"></div>
+    </div>
+
+    <!-- SALA 10: O ESTADO NOVO E A FRAUDE DO PLANO COHEN -->
+    <div id="room-10" class="room">
+      <h2>SALA 10: O Golpe do Estado Novo (1937-1945)</h2>
+      <div class="question-block">
+        <p><strong>Desafio 10:</strong> Qual foi o nome do falso plano de conspiração comunista forjado por militares que Getúlio Vargas utilizou para cancelar as eleições de 1938 e instaurar a ditadura do Estado Novo?</p>
+        <input type="text" id="cohen-input" placeholder="Digite o nome do plano falso..." />
+      </div>
+      <button onclick="checkRoom10()">Validar Sala 10</button>
+      <div id="feedback-10" class="feedback"></div>
+    </div>
+
+    <!-- SALA 11: TRABALHISMO, CLT E PROPAGANDA VARGUISTA -->
+    <div id="room-11" class="room">
+      <h2>SALA 11: O Trabalhismo e o Órgão de Censura</h2>
+      <div class="question-block">
+        <p><strong>Desafio 11 (Múltipla Escolha):</strong> Durante o Estado Novo, qual foi o órgão criado por Vargas responsável por gerir a propaganda do regime, exaltar a figura do presidente e exercer severa censura sobre a imprensa, rádio e teatro?</p>
+        <div class="options">
+          <label><input type="radio" name="q11" value="A"> DIPS (Departamento de Imprensa e Propaganda da Saúde).</label>
+          <label><input type="radio" name="q11" value="B"> DIP (Departamento de Imprensa e Propaganda).</label>
+          <label><input type="radio" name="q11" value="C"> DOPS (Departamento de Ordem Política e Social).</label>
+        </div>
+      </div>
+      <button onclick="checkRoom11()">Submeter Resposta da Sala 11</button>
+      <div id="feedback-11" class="feedback"></div>
+    </div>
+
+    <!-- SALA 12: SEGUNDA GUERRA E A QUEDA DE VARGAS (CHAVE FINAL) -->
+    <div id="room-12" class="room">
+      <h2>SALA 12: A Contradição do Estado Novo e a FEB</h2>
+      <div class="question-block">
+        <p>Para desativar a última trava do sistema e concluir o Escape Room, resolva a questão final:</p>
+        <p><strong>Desafio Final:</strong> Em 1944, o Brasil enviou a FEB (Força Expedicionária Brasileira) para combater o nazi-fascismo na Europa. Como se chamava a força armada enviada e qual a principal contradição política do regime ao tomar esta atitude?</p>
+        <div class="options">
+          <label><input type="radio" name="q12" value="A"> A contradição de enviar uma tropa para combater uma ditadura fascista na Europa enquanto o próprio Brasil vivia sob a ditadura varguista do Estado Novo.</label>
+          <label><input type="radio" name="q12" value="B"> A contradição de lutar ao lado dos países do Eixo contra a Inglaterra e os EUA.</label>
+          <label><input type="radio" name="q12" value="C"> A contradição de defender o fim da escravidão na Alemanha enquanto o Brasil mantinha engenhos feudais.</label>
+        </div>
+      </div>
+      <button onclick="checkRoom12()">Desativar Sistema e Concluir</button>
+      <div id="feedback-12" class="feedback"></div>
+    </div>
+
+    <!-- TELA DE VITÓRIA -->
+    <div id="room-victory" class="room">
+      <h2 style="color: var(--success); font-size: 2rem;">🏆 DESAFIO CONCLUÍDO! SISTEMA RESTAURADO!</h2>
+      <p style="font-size: 1.2rem;">Parabéns! Superou com êxito os 12 setores do arquivo histórico do Brasil!</p>
+      
+      <div class="question-block" style="text-align: center;">
+        <p><strong>Classificação Final:</strong></p>
+        <p style="font-size: 1.5rem; color: var(--blue);">🎖️ Historiador de Elite & Mestre do Tempo</p>
+        <p><strong>Tempo Restante:</strong> <span id="final-time" style="color: var(--accent); font-weight: bold; font-size: 1.4rem;"></span></p>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    let timeLeft = 3600;
+    const timerElement = document.getElementById('timer');
+    let targetRoomAfterModal = 2;
+
+    const countdown = setInterval(() => {
+      let minutes = Math.floor(timeLeft / 60);
+      let seconds = timeLeft % 60;
+      seconds = seconds < 10 ? '0' + seconds : seconds;
+      minutes = minutes < 10 ? '0' + minutes : minutes;
+      
+      timerElement.textContent = `${minutes}:${seconds}`;
+      
+      if (timeLeft <= 0) {
+        clearInterval(countdown);
+        alert('Tempo Esgotado! O sistema foi bloqueado. Recarregue a página para tentar novamente.');
+        location.reload();
+      }
+      timeLeft--;
+    }, 1000);
+
+    function showFeedback(elementId, text, isError = true, hint = "") {
+      const fb = document.getElementById(elementId);
+      fb.className = isError ? 'feedback error' : 'feedback';
+      let content = `<strong>${text}</strong>`;
+      if (hint && isError) {
+        content += `<div class="hint">💡 <strong>Dica de Pesquisa:</strong> ${hint}</div>`;
+      }
+      fb.innerHTML = content;
+    }
+
+    function triggerLevelUp(currentRoom, nextRoomNum, levelTitle, rewardTitle, msg) {
+      document.getElementById(`room-${currentRoom}`).classList.remove('active');
+      document.getElementById('current-level').textContent = levelTitle;
+      document.getElementById('reward-title').textContent = rewardTitle;
+      document.getElementById('level-msg').textContent = msg;
+      document.getElementById('level-modal').style.display = 'block';
+      targetRoomAfterModal = nextRoomNum;
+    }
+
+    function continueToNextRoom() {
+      document.getElementById('level-modal').style.display = 'none';
+      if(targetRoomAfterModal === 'victory') {
+        document.getElementById('room-victory').classList.add('active');
+      } else {
+        document.getElementById(`room-${targetRoomAfterModal}`).classList.add('active');
+      }
+    }
+
+    // VALIDAÇÕES
+    function checkRoom1() {
+      const q = document.querySelector('input[name="q1"]:checked');
+      if (!q) { showFeedback('feedback-1', 'Selecione uma opção!', true); return; }
+      if (q.value === 'B') {
+        triggerLevelUp(1, 2, 'Sala 2 de 12 - Conhecedor do Açúcar', '📜 Pergaminho do Escambo', 'Compreendeu o contacto inicial e o impacto da colonização!');
+      } else {
+        showFeedback('feedback-1', 'Resposta Incorreta!', true, 'O escambo não envolvia moedas de ouro; consistia na troca de pau-brasil por objetos de metal e machados.');
+      }
+    }
+
+    function checkRoom2() {
+      const tf1 = document.getElementById('tf1').value;
+      const tf2 = document.getElementById('tf2').value;
+      const tf3 = document.getElementById('tf3').value;
+      if (tf1 === 'V' && tf2 === 'V' && tf3 === 'F') {
+        triggerLevelUp(2, 3, 'Sala 3 de 12 - Navegador Atlântico', '⚓ Bússola das Rotas Coloniais', 'Análise correta da estrutura açucareira e das Câmaras Municipais!');
+      } else {
+        showFeedback('feedback-2', 'Sua combinação contém erros!', true, 'Atenção ao item 3: Os Senhores de Engenho ocupavam o cargo de "Homens-Bons" e dominavam as Câmaras Municipais.');
+      }
+    }
+
+    function checkRoom3() {
+      const input = document.getElementById('poet-input').value.trim().toLowerCase();
+      if (input.includes('castro alves')) {
+        triggerLevelUp(3, 4, 'Sala 4 de 12 - Defensor da Liberdade', '🕊️ Lira Condoreira', 'A poética de Castro Alves denunciou a tragédia dos navios tumbeiros!');
+      } else {
+        showFeedback('feedback-3', 'Acesso Negado!', true, 'Pesquise pelo "Poeta dos Escravos", autor de "O Navio Negreiro" e "Vozes d’África".');
+      }
+    }
+
+    function checkRoom4() {
+      const q = document.querySelector('input[name="q4"]:checked');
+      if (!q) { showFeedback('feedback-4', 'Selecione uma opção!', true); return; }
+      if (q.value === 'A') {
+        triggerLevelUp(4, 5, 'Sala 5 de 12 - Guardião de Palmares', '🛡️ Escudo de Zumbi', 'Identificou a estratégia sertanista utilizada contra os quilombos.');
+      } else {
+        showFeedback('feedback-4', 'Resposta Incorreta!', true, 'A Coroa contratou o bandeirante paulista Domingos Jorge Velho para certificar o cerco e a destruição de Palmares em 1694.');
+      }
+    }
+
+    function checkRoom5() {
+      const input = document.getElementById('tax-input').value.trim().toLowerCase();
+      if (input.includes('derrama')) {
+        triggerLevelUp(5, 6, 'Sala 6 de 12 - Auditor do Império', '⚖️ Balança das Minas', 'A derrama provocou a revolta e serviu de estopim para a Inconfidência Mineira!');
+      } else {
+        showFeedback('feedback-5', 'Resposta Incorreta!', true, 'Qual era o nome do mecanismo de cobrança forçada quando a quota anual de 100 arrobas de ouro não era atingida?');
+      }
+    }
+
+    function checkRoom6() {
+      const input = document.getElementById('laws-input').value.trim().toUpperCase();
+      if (input === 'EUSEBIO-VENTRE-SEXA-AUREA') {
+        triggerLevelUp(6, 7, 'Sala 7 de 12 - Jurista da Abolição', '📜 Carta da Liberdade', 'Cronologia das Leis Abolicionistas validada!');
+      } else {
+        showFeedback('feedback-6', 'Sequência incorreta!', true, 'Pesquise os anos: Eusébio de Queirós (1850), Ventre Livre (1871), Sexagenários (1885) e Áurea (1888).');
+      }
+    }
+
+    function checkRoom7() {
+      const q = document.querySelector('input[name="q7"]:checked');
+      if (!q) { showFeedback('feedback-7', 'Selecione uma opção!', true); return; }
+      if (q.value === 'B') {
+        triggerLevelUp(7, 8, 'Sala 8 de 12 - Analista da República', '🏙️ Chave do Século XX', 'Análise estrutural do Pós-Abolição e da política de atração da imigração europeia correta!');
+      } else {
+        showFeedback('feedback-7', 'Resposta Incorreta!', true, 'Não houve distribuição de terras nem indenização aos libertos; o Estado optou por financiar a chegada de imigrantes europeus.');
+      }
+    }
+
+    function checkRoom8() {
+      const input = document.getElementById('alliance-input').value.trim().toLowerCase();
+      if (input.includes('alianca liberal') || input.includes('aliança liberal')) {
+        triggerLevelUp(8, 9, 'Sala 9 de 12 - Articulador de 1930', '🏛️ Selo da Revolução de 30', 'A Aliança Liberal uniu Minas Gerais, Rio Grande do Sul e Paraíba!');
+      } else {
+        showFeedback('feedback-8', 'Resposta Incorreta!', true, 'Pesquise qual foi a aliança opositora formada para a candidatura de Getúlio Vargas e João Pessoa em 1930.');
+      }
+    }
+
+    function checkRoom9() {
+      const tf1 = document.getElementById('tf_v1').value;
+      const tf2 = document.getElementById('tf_v2').value;
+      const tf3 = document.getElementById('tf_v3').value;
+      if (tf1 === 'V' && tf2 === 'F' && tf3 === 'V') {
+        triggerLevelUp(9, 10, 'Sala 10 de 12 - Estrategista dos Anos 30', '📡 Antena do Estado Sítio', 'Identificou a oposição entre Integralistas (fascistas) e Aliança Nacional Libertadora (antifascista)!');
+      } else {
+        showFeedback('feedback-9', 'Combinação Incorreta!', true, 'Atenção ao item 2: A ANL (Aliança Nacional Libertadora) era uma frente antifascista e de esquerda, oposta ao fascismo.');
+      }
+    }
+
+    function checkRoom10() {
+      const input = document.getElementById('cohen-input').value.trim().toLowerCase();
+      if (input.includes('plano cohen') || input.includes('cohen')) {
+        triggerLevelUp(10, 11, 'Sala 11 de 12 - Decodificador do Estado Novo', '🔒 Dossiê da Ditadura', 'O Plano Cohen foi a farsa que justificou o golpe de 10 de novembro de 1937!');
+      } else {
+        showFeedback('feedback-10', 'Resposta Incorreta!', true, 'Pesquise pelo documento forjado pelo Capitão Olímpio Mourão Filho alegando uma insurreição comunista.');
+      }
+    }
+
+    function checkRoom11() {
+      const q = document.querySelector('input[name="q11"]:checked');
+      if (!q) { showFeedback('feedback-11', 'Selecione uma opção!', true); return; }
+      if (q.value === 'B') {
+        triggerLevelUp(11, 12, 'Sala 12 de 12 - Crítico do Trabalhismo', '📻 Microfone do Estado Novo', 'O DIP controlava a censura e a imagem de Vargas como o "Pai dos Pobres"!');
+      } else {
+        showFeedback('feedback-11', 'Resposta Incorreta!', true, 'O órgão responsável pela propaganda oficial e censura era o DIP (Departamento de Imprensa e Propaganda).');
+      }
+    }
+
+    function checkRoom12() {
+      const q = document.querySelector('input[name="q12"]:checked');
+      if (!q) { showFeedback('feedback-12', 'Selecione uma opção!', true); return; }
+      if (q.value === 'A') {
+        clearInterval(countdown);
+        document.getElementById('final-time').textContent = timerElement.textContent;
+        triggerLevelUp(12, 'victory', 'Mestre Absoluto da História', '🏆 Troféu de Ouro da História', 'Você completou as 12 salas e decifrou toda a evolução histórica!');
+      } else {
+        showFeedback('feedback-12', 'Resposta Incorreta!', true, 'A grande contradição do regime foi enviar a FEB para combater regimes ditatoriais na Europa enquanto mantinha a ditadura varguista no Brasil.');
+      }
+    }
+  </script>
+</body>
+</html>
