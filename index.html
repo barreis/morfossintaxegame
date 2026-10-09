@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Escape Room Histórico: O Código do Tempo (12 Salas)</title>
+  <title>Escape Room: Mestre da Morfossintaxe (30 Salas)</title>
   <style>
     :root {
       --bg-color: #0d1117;
@@ -14,6 +14,7 @@
       --success: #2ea043;
       --warning: #d29922;
       --blue: #58a6ff;
+      --purple: #bc8cff;
     }
 
     * { box-sizing: border-box; font-family: 'Courier New', Courier, monospace; }
@@ -39,6 +40,15 @@
       padding: 5px 12px; border-radius: 20px; font-weight: bold; font-size: 0.9rem;
     }
 
+    .progress-outer {
+      width: 100%; background: #0d1117; height: 10px;
+      border-radius: 5px; margin-top: 15px; border: 1px solid var(--border); overflow: hidden;
+    }
+
+    .progress-inner {
+      height: 100%; width: 3.33%; background: var(--success); transition: width 0.3s ease;
+    }
+
     #timer { font-size: 1.8rem; font-weight: bold; color: var(--accent); }
 
     .container {
@@ -51,6 +61,13 @@
     .room.active { display: block; }
 
     h2 { color: var(--blue); border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-top: 0; }
+
+    .theory-box {
+      background: #1c2128; border-left: 4px solid var(--purple);
+      padding: 15px; border-radius: 4px; margin-bottom: 20px; font-size: 0.95rem; line-height: 1.5;
+    }
+
+    .theory-box h4 { margin: 0 0 8px 0; color: var(--purple); font-size: 1.05rem; }
 
     .question-block {
       background: #0d1117; border: 1px solid var(--border);
@@ -111,209 +128,602 @@
 <body>
 
   <header>
-    <h1>⌛ Operação Restauração Histórica (12 Salas)</h1>
-    <p>Decifre os enigmas das estruturas políticas, sociais e econômicas do Brasil desde a Pré-Colónia até a Era Vargas!</p>
+    <h1>🧠 Maratona de Morfossintaxe para Vestibulares</h1>
+    <p>30 Níveis de Imersão: Da Análise de Classes Gramaticais ao Período Composto Complexo!</p>
     
     <div class="status-bar">
-      <div><strong>Progresso:</strong> <span id="current-level" class="badge">Sala 1 de 12 - Aprendiz</span></div>
+      <div><strong>Nível:</strong> <span id="current-level" class="badge">Sala 1 de 30</span></div>
       <div>⏳ <span id="timer">60:00</span></div>
+    </div>
+    <div class="progress-outer">
+      <div id="progress-bar" class="progress-inner"></div>
     </div>
   </header>
 
   <div class="container">
 
-    <!-- TELA DE LEVEL UP -->
+    <!-- MODAL LEVEL UP -->
     <div id="level-modal" class="level-up-modal">
-      <h3>🎉 PARABÉNS! VOCÊ AVANÇOU DE NÍVEL!</h3>
-      <p id="level-msg">O seu conhecimento sobre a formação social brasileira desbloqueou um novo setor do arquivo.</p>
-      <p><strong>Nova Conquista Desbloqueada:</strong> <span id="reward-title" style="color: var(--blue);"></span></p>
-      <button onclick="continueToNextRoom()">Avançar para a Próxima Sala ➔</button>
+      <h3>🎉 FASE CONCLUÍDA!</h3>
+      <p id="level-msg">Sua análise morfossintática está cada vez mais apurada.</p>
+      <p><strong>Conquista:</strong> <span id="reward-title" style="color: var(--blue);"></span></p>
+      <button onclick="continueToNextRoom()">Avançar para o Próximo Nível ➔</button>
     </div>
 
-    <!-- SALA 1: POVOS INDÍGENAS E O ESCAMBO -->
+    <!-- SALAS 1 A 30 -->
+
+    <!-- SALA 1 -->
     <div id="room-1" class="room active">
-      <h2>SALA 1: Sociedades Originárias e o Contato Inicial</h2>
+      <h2>SALA 1: Substantivo Concreto vs. Abstrato</h2>
+      <div class="theory-box">
+        <h4>📘 Conceito Teórico:</h4>
+        Substantivo abstrato indica ações, estados, qualidades ou sentimentos que dependem de um ser para existir (ex: <em>beleza, estudo, saudade</em>). Substantivos concretos designam seres de existência própria, reais ou imaginários (ex: <em>livro, fada, ar</em>).
+      </div>
       <div class="question-block">
-        <p><strong>Desafio 1 (Múltipla Escolha):</strong> Sobre as sociedades indígenas brasileiras no século XVI e o contacto inicial com os portugueses, qual das opções traduz corretamente a relação económica do escambo e o impacto cultural?</p>
+        <p>Na frase <em>"A <u>construção</u> do edifício levou anos, mas a <u>beleza</u> do projeto impressionou a todos"</em>, as palavras sublinhadas funcionam morfologicamente como:</p>
         <div class="options">
-          <label><input type="radio" name="q1" value="A"> O escambo envolvia a troca do pau-brasil por moedas de ouro portuguesas, fortalecendo a economia monetária mercantil das tribos Tupi.</label>
-          <label><input type="radio" name="q1" value="B"> O escambo baseava-se na troca do trabalho indígena na extração do pau-brasil por objetos de metal e quinquilharias; em seguida, a tentativa de escravização gerou guerras de resistência e a Guerra Justa.</label>
-          <label><input type="radio" name="q1" value="C"> Os povos indígenas aderiram voluntariamente ao trabalho nas lavouras de açúcar porque viam a monarquia portuguesa como aliada natural contra os franceses.</label>
+          <label><input type="radio" name="q1" value="A"> Substantivo Concreto e Substantivo Abstrato.</label>
+          <label><input type="radio" name="q1" value="B"> Ambos são Substantivos Abstratos.</label>
+          <label><input type="radio" name="q1" value="C"> Substantivo Abstrato e Adjetivo.</label>
         </div>
       </div>
-      <button onclick="checkRoom1()">Submeter Resposta da Sala 1</button>
-      <div id="feedback-1" class="feedback"></div>
+      <button onclick="checkR1()">Enviar Resposta</button>
+      <div id="fb-1" class="feedback"></div>
     </div>
 
-    <!-- SALA 2: ESTRUTURA COLONIAL E AÇÚCAR (V/F) -->
+    <!-- SALA 2 -->
     <div id="room-2" class="room">
-      <h2>SALA 2: O Sistema Colonial e a Economia Açucareira</h2>
-      <p>Marque <strong>V</strong> para Verdadeiro e <strong>F</strong> para Falso:</p>
+      <h2>SALA 2: Substantivação e Adjetivação</h2>
+      <div class="theory-box">
+        <h4>📘 Conceito Teórico:</h4>
+        A conversão funcional (ou derivação imprópria) ocorre quando uma palavra muda de classe gramatical pelo contexto. Um adjetivo antecedido por artigo vira substantivo (ex: "O <em>velho</em> sabia tudo").
+      </div>
       <div class="question-block">
-        <div class="tf-item">
-          <p>1. O modelo plantation colonial assentava-se no latifúndio, na monocultura para exportação e na mão de obra escravizada. <select id="tf1"><option value="">-</option><option value="V">V</option><option value="F">F</option></select></p>
-        </div>
-        <div class="tf-item">
-          <p>2. A Companhia das Índias Ocidentais holandesa invadiu Pernambuco no século XVII devido ao Pacto Colonial exclusivo com Espanha durante a União Ibérica. <select id="tf2"><option value="">-</option><option value="V">V</option><option value="F">F</option></select></p>
-        </div>
-        <div class="tf-item">
-          <p>3. Os Senhores de Engenho detinham apenas poder económico, sem qualquer interferência na política das Câmaras Municipais. <select id="tf3"><option value="">-</option><option value="V">V</option><option value="F">F</option></select></p>
+        <p>Em <em>"Os <u>bons</u> serão recompensados e o <u>saber</u> libertará a mente"</em>, os termos destacados são:</p>
+        <div class="options">
+          <label><input type="radio" name="q2" value="A"> Adjetivo e Verbo.</label>
+          <label><input type="radio" name="q2" value="B"> Substantivo e Substantivo (substantivação pelo artigo).</label>
+          <label><input type="radio" name="q2" value="C"> Adjetivo e Substantivo.</label>
         </div>
       </div>
-      <button onclick="checkRoom2()">Validar Sala 2</button>
-      <div id="feedback-2" class="feedback"></div>
+      <button onclick="checkR2()">Enviar Resposta</button>
+      <div id="fb-2" class="feedback"></div>
     </div>
 
-    <!-- SALA 3: A DIÁSPORA E OS NAVIOS NEGREIROS -->
+    <!-- SALA 3 -->
     <div id="room-3" class="room">
-      <h2>SALA 3: Rota Atlântica e o Tumbeiro</h2>
-      <div class="question-block">
-        <p><strong>Desafio de Decodificação:</strong> Qual é o nome do poeta abolicionista da Terceira Geração Romântica (Geração Condoreira) que denunciou os horrores das travessias nos navios negreiros na obra <em>"O Navio Negreiro"</em>?</p>
-        <input type="text" id="poet-input" placeholder="Digite o nome do poeta..." />
+      <h2>SALA 3: Pronome Substantivo vs. Pronome Adjetivo</h2>
+      <div class="theory-box">
+        <h4>📘 Conceito Teórico:</h4>
+        O <strong>Pronome Adjetivo</strong> acompanha um substantivo modificando-o (ex: <em>Minha</em> casa). O <strong>Pronome Substantivo</strong> substitui o substantivo (ex: A minha é bonita, a <em>sua</em> não).
       </div>
-      <button onclick="checkRoom3()">Validar Sala 3</button>
-      <div id="feedback-3" class="feedback"></div>
+      <div class="question-block">
+        <p>Em <em>"<u>Este</u> livro é meu; <u>aqui</u> está o <u>seu</u>"</em>, a classificação exata dos pronomes <strong>"Este"</strong> e <strong>"seu"</strong> é, respectivamente:</p>
+        <div class="options">
+          <label><input type="radio" name="q3" value="A"> Pronome Adjetivo e Pronome Substantivo.</label>
+          <label><input type="radio" name="q3" value="B"> Pronome Substantivo e Pronome Adjetivo.</label>
+          <label><input type="radio" name="q3" value="C"> Ambos são Pronomes Adjetivos.</label>
+        </div>
+      </div>
+      <button onclick="checkR3()">Enviar Resposta</button>
+      <div id="fb-3" class="feedback"></div>
     </div>
 
-    <!-- SALA 4: FORMAS DE RESISTÊNCIA E QUILOMBOS -->
+    <!-- SALA 4 -->
     <div id="room-4" class="room">
-      <h2>SALA 4: O Quilombo de Palmares e a Resistência</h2>
+      <h2>SALA 4: Advérbio e a Invariabilidade Morfológica</h2>
+      <div class="theory-box">
+        <h4>📘 Conceito Teórico:</h4>
+        Advérbios são palavras <strong>invariáveis</strong> que modificam verbos, adjetivos ou outros advérbios. Adjetivos são variáveis e concordam com o substantivo. Ex: "Eles comeram <em>meio</em> hambúrguer" (numeral) vs. "Ela ficou <em>meio</em> cansada" (advérbio = um pouco).
+      </div>
       <div class="question-block">
-        <p><strong>Desafio 4 (Múltipla Escolha):</strong> O Quilombo dos Palmares (século XVII) representou a maior experiência de resistência ao sistema escravista nas Américas. Qual foi a estratégia utilizada pela Coroa e pelos engenhos para destruí-lo?</p>
+        <p>Assinale a frase em que a palavra <strong>"bastante"</strong> funciona como <u>Advérbio</u>:</p>
         <div class="options">
-          <label><input type="radio" name="q4" value="A"> Contratação de expedições bandeirantes de apresamento, lideradas por Domingos Jorge Velho.</label>
-          <label><input type="radio" name="q4" value="B"> Assinatura de um tratado de paz definitivo reconhecendo a independência de Palmares sob o comando de Zumbi.</label>
-          <label><input type="radio" name="q4" value="C"> Envio de tropas britânicas para garantir o fornecimento de mão de obra para a mineração.</label>
+          <label><input type="radio" name="q4" value="A"> Havia bastantes motivos para o protesto.</label>
+          <label><input type="radio" name="q4" value="B"> As alunas estudaram bastante para o vestibular.</label>
+          <label><input type="radio" name="q4" value="C"> Compramos bastantes livros na feira.</label>
         </div>
       </div>
-      <button onclick="checkRoom4()">Submeter Resposta da Sala 4</button>
-      <div id="feedback-4" class="feedback"></div>
+      <button onclick="checkR4()">Enviar Resposta</button>
+      <div id="fb-4" class="feedback"></div>
     </div>
 
-    <!-- SALA 5: MINERAÇÃO E A REGULAMENTAÇÃO FISCAL -->
+    <!-- SALA 5 -->
     <div id="room-5" class="room">
-      <h2>SALA 5: O Século do Ouro e a Cobrança do Quinto</h2>
-      <div class="question-block">
-        <p><strong>Desafio 5 (Análise Fiscal):</strong> Como se chamava o imposto fixo de 100 arrobas de ouro anuais cobrado pela Coroa portuguesa que, quando não atingido, culminava na cobrança forçada sobre toda a população da região das minas?</p>
-        <input type="text" id="tax-input" placeholder="Digite o nome do imposto forçado..." />
+      <h2>SALA 5: O Sujeito Oculto (Desinencial) e Indeterminado</h2>
+      <div class="theory-box">
+        <h4>📘 Conceito Teórico:</h4>
+        O sujeito desinencial é identificado pela terminação verbal (ex: <em>Fizemos</em> o teste = Nós). O sujeito indeterminado ocorre com verbo na 3ª pessoa do plural sem contexto prévio ou Verbo + SE (índice de indeterminação).
       </div>
-      <button onclick="checkRoom5()">Validar Sala 5</button>
-      <div id="feedback-5" class="feedback"></div>
+      <div class="question-block">
+        <p>Classifique o sujeito da oração: <em>"Anunciaram novas vagas no mural do colégio"</em>.</p>
+        <div class="options">
+          <label><input type="radio" name="q5" value="A"> Sujeito Oculto (Nós/Eles).</label>
+          <label><input type="radio" name="q5" value="B"> Sujeito Indeterminado (verbo na 3ª p. plural sem referente).</label>
+          <label><input type="radio" name="q5" value="C"> Oração Sem Sujeito.</label>
+        </div>
+      </div>
+      <button onclick="checkR5()">Enviar Resposta</button>
+      <div id="fb-5" class="feedback"></div>
     </div>
 
-    <!-- SALA 6: LEIS ABOLICIONISTAS E GRADUALISMO -->
+    <!-- SALA 6 -->
     <div id="room-6" class="room">
-      <h2>SALA 6: O Gradualismo Abolicionista do Século XIX</h2>
-      <p>Ordene as Leis Abolicionistas brasileiras em <strong>ordem cronológica exata</strong> (da mais antiga para a mais recente) utilizando as siglas:</p>
-      <div class="question-block">
-        <ul>
-          <li><strong>[AUREA]</strong> Lei Áurea</li>
-          <li><strong>[EUSEBIO]</strong> Lei Eusébio de Queirós</li>
-          <li><strong>[SEXA]</strong> Lei dos Sexagenários (Saraiva-Cotegipe)</li>
-          <li><strong>[VENTRE]</strong> Lei do Ventre Livre</li>
-        </ul>
-        <p>Digite a sequência das siglas separadas por hífen (Ex: EUSEBIO-VENTRE-SEXA-AUREA):</p>
-        <input type="text" id="laws-input" placeholder="SIGLA-SIGLA-SIGLA-SIGLA" />
+      <h2>SALA 6: Oração Sem Sujeito (Verbos Impessoais)</h2>
+      <div class="theory-box">
+        <h4>📘 Conceito Teórico:</h4>
+        Verbos que indicam fenômenos da natureza, o verbo <strong>Haver</strong> no sentido de existir/ocorrer e o verbo <strong>Fazer</strong> indicando tempo decorrido são impessoais e ficam sempre na 3ª pessoa do singular.
       </div>
-      <button onclick="checkRoom6()">Validar Sala 6</button>
-      <div id="feedback-6" class="feedback"></div>
+      <div class="question-block">
+        <p>Qual das frases abaixo apresenta erro de concordância devido ao uso incorreto do verbo impessoal?</p>
+        <div class="options">
+          <label><input type="radio" name="q6" value="A"> Faz três anos que não o vejo.</label>
+          <label><input type="radio" name="q6" value="B"> Houveram muitos acidentes na rodovia ontem.</label>
+          <label><input type="radio" name="q6" value="C"> Há muitos alunos preparados nesta sala.</label>
+        </div>
+      </div>
+      <button onclick="checkR6()">Enviar Resposta</button>
+      <div id="fb-6" class="feedback"></div>
     </div>
 
-    <!-- SALA 7: O PÓS-ABOLIÇÃO E O RACISMO ESTRUTURAL -->
+    <!-- SALA 7 -->
     <div id="room-7" class="room">
-      <h2>SALA 7: O Pós-Abolição e a Política de Branqueamento</h2>
+      <h2>SALA 7: Transitividade Verbal (VTD vs. VTI)</h2>
+      <div class="theory-box">
+        <h4>📘 Conceito Teórico:</h4>
+        VTD exige complemento sem preposição obrigatória (Objeto Direto). VTI exige complemento regido por preposição obrigatória (Objeto Indireto).
+      </div>
       <div class="question-block">
-        <p><strong>Desafio 7 (Múltipla Escolha):</strong> Após a assinatura da Lei Áurea em 1888, qual foi a política do Estado brasileiro em relação à população negra recém-liberta e à mão de obra?</p>
+        <p>Na oração <em>"Os cientistas <u>confiam</u> nos resultados da pesquisa"</em>, o verbo destacado é classificado como:</p>
         <div class="options">
-          <label><input type="radio" name="q7" value="A"> Doação de terras públicas para reforma agraria aos ex-escravizados e integração ao mercado assalariado.</label>
-          <label><input type="radio" name="q7" value="B"> Abandono do Estado sem indenização ou incentivos à população negra, combinado com a subvenção do Estado à imigração europeia (substituição de mão de obra e branqueamento).</label>
-          <label><input type="radio" name="q7" value="C"> Criação imediata de leis de cotas nas universidades para compensar os séculos de trabalho não remunerado.</label>
+          <label><input type="radio" name="q7" value="A"> Verbo Transitivo Direto.</label>
+          <label><input type="radio" name="q7" value="B"> Verbo Transitivo Indireto (pede preposição 'em').</label>
+          <label><input type="radio" name="q7" value="C"> Verbo Intransitivo.</label>
         </div>
       </div>
-      <button onclick="checkRoom7()">Submeter Resposta da Sala 7</button>
-      <div id="feedback-7" class="feedback"></div>
+      <button onclick="checkR7()">Enviar Resposta</button>
+      <div id="fb-7" class="feedback"></div>
     </div>
 
-    <!-- SALA 8: A REVOLUÇÃO DE 1930 E O FIM DA REPÚBLICA VELHA -->
+    <!-- SALA 8 -->
     <div id="room-8" class="room">
-      <h2>SALA 8: A Crise das Elites e o Surgimento da Era Vargas</h2>
-      <div class="question-block">
-        <p><strong>Desafio 8:</strong> Qual foi a aliança política regional liderada por Getúlio Vargas que contestou a vitória de Júlio Prestes nas eleições de 1930, culminando na Revolução de 1930?</p>
-        <input type="text" id="alliance-input" placeholder="Digite o nome da coligação política..." />
+      <h2>SALA 8: Verbo Bitransitivo (VTDI)</h2>
+      <div class="theory-box">
+        <h4>📘 Conceito Teórico:</h4>
+        Verbos Bitransitivos exigem dois complementos simultâneos: um Objeto Direto (sem preposição) e um Objeto Indireto (com preposição). Ex: entregar algo (OD) a alguém (OI).
       </div>
-      <button onclick="checkRoom8()">Validar Sala 8</button>
-      <div id="feedback-8" class="feedback"></div>
+      <div class="question-block">
+        <p>Identifique o Objeto Indireto na oração: <em>"A diretora entregou o prêmio ao melhor aluno"</em>.</p>
+        <input type="text" id="in-8" placeholder="Digite exatamente o termo..." />
+      </div>
+      <button onclick="checkR8()">Enviar Resposta</button>
+      <div id="fb-8" class="feedback"></div>
     </div>
 
-    <!-- SALA 9: GOVERNO CONSTITUCIONAL E RADICALIZAÇÃO (1934-1937) -->
+    <!-- SALA 9 -->
     <div id="room-9" class="room">
-      <h2>SALA 9: A Polarization Política dos Anos 30</h2>
-      <p>Associe as ideologias atuantes durante o Governo Constitucional de Vargas. Marque <strong>V</strong> para Verdadeiro e <strong>F</strong> para Falso:</p>
+      <h2>SALA 9: Predicativo do Sujeito vs. Predicativo do Objeto</h2>
+      <div class="theory-box">
+        <h4>📘 Conceito Teórico:</h4>
+        Predicativo do Sujeito atribui qualidade ao sujeito (ex: "O aluno é <em>inteligente</em>"). Predicativo do Objeto atribui qualidade/estado ao objeto (ex: "Julguei o réu <em>culpado</em>").
+      </div>
       <div class="question-block">
-        <div class="tf-item">
-          <p>1. A AIB (Ação Integralista Brasileira), liderada por Plínio Salgado, era de inspiração fascista e defendia o lema "Deus, Pátria e Família". <select id="tf_v1"><option value="">-</option><option value="V">V</option><option value="F">F</option></select></p>
-        </div>
-        <div class="tf-item">
-          <p>2. A ANL (Aliança Nacional Libertadora) apoiava o fascismo de Mussolini e defendia o envio de tropas brasileiras para apoiar a Alemanha. <select id="tf_v2"><option value="">-</option><option value="V">V</option><option value="F">F</option></select></p>
-        </div>
-        <div class="tf-item">
-          <p>3. A Intentona Comunista de 1935 serviu de pretexto para o Estado decretar Estado de Sítio e endurecer a repressão política. <select id="tf_v3"><option value="">-</option><option value="V">V</option><option value="F">F</option></select></p>
+        <p>Na frase <em>"A professora deixou os estudantes <u>entusiasmados</u>"</em>, a palavra sublinhada é:</p>
+        <div class="options">
+          <label><input type="radio" name="q9" value="A"> Predicativo do Sujeito.</label>
+          <label><input type="radio" name="q9" value="B"> Predicativo do Objeto (refere-se a 'os estudantes').</label>
+          <label><input type="radio" name="q9" value="C"> Adjunto Adnominal.</label>
         </div>
       </div>
-      <button onclick="checkRoom9()">Validar Sala 9</button>
-      <div id="feedback-9" class="feedback"></div>
+      <button onclick="checkR9()">Enviar Resposta</button>
+      <div id="fb-9" class="feedback"></div>
     </div>
 
-    <!-- SALA 10: O ESTADO NOVO E A FRAUDE DO PLANO COHEN -->
+    <!-- SALA 10 -->
     <div id="room-10" class="room">
-      <h2>SALA 10: O Golpe do Estado Novo (1937-1945)</h2>
-      <div class="question-block">
-        <p><strong>Desafio 10:</strong> Qual foi o nome do falso plano de conspiração comunista forjado por militares que Getúlio Vargas utilizou para cancelar as eleições de 1938 e instaurar a ditadura do Estado Novo?</p>
-        <input type="text" id="cohen-input" placeholder="Digite o nome do plano falso..." />
+      <h2>SALA 10: Tipos de Predicado (Verbal, Nominal e Verbo-Nominal)</h2>
+      <div class="theory-box">
+        <h4>📘 Conceito Teórico:</h4>
+        - <strong>Nominal:</strong> Verbo de Ligação + Predicativo do Sujeito.<br>
+        - <strong>Verbal:</strong> Verbo nocional (ação) sem predicativo.<br>
+        - <strong>Verbo-Nominal:</strong> Verbo nocional (ação) + Predicativo (do sujeito ou do objeto).
       </div>
-      <button onclick="checkRoom10()">Validar Sala 10</button>
-      <div id="feedback-10" class="feedback"></div>
+      <div class="question-block">
+        <p>A frase <em>"Os atletas chegaram exaustos ao estádio"</em> possui qual tipo de predicado?</p>
+        <div class="options">
+          <label><input type="radio" name="q10" value="A"> Predicado Nominal.</label>
+          <label><input type="radio" name="q10" value="B"> Predicado Verbal.</label>
+          <label><input type="radio" name="q10" value="C"> Predicado Verbo-Nominal (verbo de ação 'chegaram' + predicativo 'exaustos').</label>
+        </div>
+      </div>
+      <button onclick="checkR10()">Enviar Resposta</button>
+      <div id="fb-10" class="feedback"></div>
     </div>
 
-    <!-- SALA 11: TRABALHISMO, CLT E PROPAGANDA VARGUISTA -->
+    <!-- SALA 11 -->
     <div id="room-11" class="room">
-      <h2>SALA 11: O Trabalhismo e o Órgão de Censura</h2>
+      <h2>SALA 11: Adjunto Adnominal vs. Complemento Nominal</h2>
+      <div class="theory-box">
+        <h4>📘 Conceito Teórico:</h4>
+        - <strong>Adjunto Adnominal:</strong> Acompanha substantivo concreto/abstrato com valor <em>ativo</em> (pratica a ação).<br>
+        - <strong>Complemento Nominal:</strong> Completa adjetivo, advérbio ou substantivo abstrato com valor <em>passivo</em> (sofre a ação) e sempre tem preposição.
+      </div>
       <div class="question-block">
-        <p><strong>Desafio 11 (Múltipla Escolha):</strong> Durante o Estado Novo, qual foi o órgão criado por Vargas responsável por gerir a propaganda do regime, exaltar a figura do presidente e exercer severa censura sobre a imprensa, rádio e teatro?</p>
+        <p>Na frase <em>"A leitura <u>do aluno</u> foi elogiada"</em> (o aluno leu), o termo sublinhado é:</p>
         <div class="options">
-          <label><input type="radio" name="q11" value="A"> DIPS (Departamento de Imprensa e Propaganda da Saúde).</label>
-          <label><input type="radio" name="q11" value="B"> DIP (Departamento de Imprensa e Propaganda).</label>
-          <label><input type="radio" name="q11" value="C"> DOPS (Departamento de Ordem Política e Social).</label>
+          <label><input type="radio" name="q11" value="A"> Adjunto Adnominal (sentido ativo: o aluno pratica a leitura).</label>
+          <label><input type="radio" name="q11" value="B"> Complemento Nominal.</label>
+          <label><input type="radio" name="q11" value="C"> Objeto Indireto.</label>
         </div>
       </div>
-      <button onclick="checkRoom11()">Submeter Resposta da Sala 11</button>
-      <div id="feedback-11" class="feedback"></div>
+      <button onclick="checkR11()">Enviar Resposta</button>
+      <div id="fb-11" class="feedback"></div>
     </div>
 
-    <!-- SALA 12: SEGUNDA GUERRA E A QUEDA DE VARGAS (CHAVE FINAL) -->
+    <!-- SALA 12 -->
     <div id="room-12" class="room">
-      <h2>SALA 12: A Contradição do Estado Novo e a FEB</h2>
-      <div class="question-block">
-        <p>Para desativar a última trava do sistema e concluir o Escape Room, resolva a questão final:</p>
-        <p><strong>Desafio Final:</strong> Em 1944, o Brasil enviou a FEB (Força Expedicionária Brasileira) para combater o nazi-fascismo na Europa. Como se chamava a força armada enviada e qual a principal contradição política do regime ao tomar esta atitude?</p>
-        <div class="options">
-          <label><input type="radio" name="q12" value="A"> A contradição de enviar uma tropa para combater uma ditadura fascista na Europa enquanto o próprio Brasil vivia sob a ditadura varguista do Estado Novo.</label>
-          <label><input type="radio" name="q12" value="B"> A contradição de lutar ao lado dos países do Eixo contra a Inglaterra e os EUA.</label>
-          <label><input type="radio" name="q12" value="C"> A contradição de defender o fim da escravidão na Alemanha enquanto o Brasil mantinha engenhos feudais.</label>
-        </div>
+      <h2>SALA 12: Complemento Nominal Exigido por Adjetivo</h2>
+      <div class="theory-box">
+        <h4>📘 Conceito Teórico:</h4>
+        Termos preposicionados que completam o sentido de um <strong>Adjetivo</strong> ou <strong>Advérbio</strong> são obrigatoriamente Complementos Nominais (jamais adjuntos adnominais).
       </div>
-      <button onclick="checkRoom12()">Desativar Sistema e Concluir</button>
-      <div id="feedback-12" class="feedback"></div>
+      <div class="question-block">
+        <p>Na oração <em>"Estamos confiantes <u>na sua aprovação</u>"</em>, o termo sublinhado completa o adjetivo 'confiantes'. Sua função é:</p>
+        <input type="text" id="in-12" placeholder="Digite o nome completo da função sintática..." />
+      </div>
+      <button onclick="checkR12()">Enviar Resposta</button>
+      <div id="fb-12" class="feedback"></div>
     </div>
 
-    <!-- TELA DE VITÓRIA -->
+    <!-- SALA 13 -->
+    <div id="room-13" class="room">
+      <h2>SALA 13: Aposto Explicativo e Especificativo</h2>
+      <div class="theory-box">
+        <h4>📘 Conceito Teórico:</h4>
+        O aposto explicativo vem isolado por vírgulas, travessões ou parênteses. O aposto especificativo especifica um substantivo genérico sem pausas/vírgulas (ex: "O poeta <em>Castro Alves</em>").
+      </div>
+      <div class="question-block">
+        <p>Em <em>"O escritor <u>Machado de Assis</u> fundou a Academia Brasileira de Letras"</em>, o termo sublinhado é:</p>
+        <div class="options">
+          <label><input type="radio" name="q13" value="A"> Aposto Explicativo.</label>
+          <label><input type="radio" name="q13" value="B"> Aposto Especificativo (individualiza o substantivo 'escritor').</label>
+          <label><input type="radio" name="q13" value="C"> Vocativo.</label>
+        </div>
+      </div>
+      <button onclick="checkR13()">Enviar Resposta</button>
+      <div id="fb-13" class="fb-13 feedback"></div>
+    </div>
+
+    <!-- SALA 14 -->
+    <div id="room-14" class="room">
+      <h2>SALA 14: Vocativo (Termo Independente)</h2>
+      <div class="theory-box">
+        <h4>📘 Conceito Teórico:</h4>
+        O Vocativo é um chamamento direto ao interlocutor, não pertence ao sujeito nem ao predicado e vem obrigatoriamente isolado por pontuação.
+      </div>
+      <div class="question-block">
+        <p>Qual das frases abaixo apresenta pontuação correta isolando o <u>Vocativo</u>?</p>
+        <div class="options">
+          <label><input type="radio" name="q14" value="A"> Jovens estudem, com dedicação para a prova.</label>
+          <label><input type="radio" name="q14" value="B"> Jovens, estudem com dedicação para a prova!</label>
+          <label><input type="radio" name="q14" value="C"> Jovens estudem com, dedicação para a prova.</label>
+        </div>
+      </div>
+      <button onclick="checkR14()">Enviar Resposta</button>
+      <div id="fb-14" class="feedback"></div>
+    </div>
+
+    <!-- SALA 15 -->
+    <div id="room-15" class="room">
+      <h2>SALA 15: Agente da Passiva</h2>
+      <div class="theory-box">
+        <h4>📘 Conceito Teórico:</h4>
+        É o termo da voz passiva analítica que executa a ação sofrida pelo sujeito paciente. É regido geralmente pelas preposições <em>por</em> (ou <em>de</em>).
+      </div>
+      <div class="question-block">
+        <p>Na oração <em>"O enigma foi decifrado <u>pelos alunos do curso</u>"</em>, o termo destacado exerce a função de:</p>
+        <input type="text" id="in-15" placeholder="Digite o nome da função sintática..." />
+      </div>
+      <button onclick="checkR15()">Enviar Resposta</button>
+      <div id="fb-15" class="feedback"></div>
+    </div>
+
+    <!-- SALA 16 -->
+    <div id="room-16" class="room">
+      <h2>SALA 16: As Funções da Partícula "SE" (Apassivador vs. Indeterminação)</h2>
+      <div class="theory-box">
+        <h4>📘 Conceito Teórico:</h4>
+        - <strong>VTD + SE:</strong> Partícula Apassivadora (há sujeito paciente, o verbo concorda): "Alugam-se salas".<br>
+        - <strong>VTI / VI + SE:</strong> Índice de Indeterminação do Sujeito (verbo fica no singular): "Precisa-se de técnicos".
+      </div>
+      <div class="question-block">
+        <p>Em <em>"Trata-se de assuntos urgentes"</em>, a partícula <strong>SE</strong> funciona como:</p>
+        <div class="options">
+          <label><input type="radio" name="q16" value="A"> Partícula Apassivadora.</label>
+          <label><input type="radio" name="q16" value="B"> Índice de Indeterminação do Sujeito (verbo VTI na 3ª p. singular).</label>
+          <label><input type="radio" name="q16" value="C"> Pronome Reflexivo.</label>
+        </div>
+      </div>
+      <button onclick="checkR16()">Enviar Resposta</button>
+      <div id="fb-16" class="feedback"></div>
+    </div>
+
+    <!-- SALA 17 -->
+    <div id="room-17" class="room">
+      <h2>SALA 17: Função Sintática dos Pronomes Oblíquos (LHE vs. O/A)</h2>
+      <div class="theory-box">
+        <h4>📘 Conceito Teórico:</h4>
+        - Pronomes <strong>O, A, OS, AS</strong> substituem Objetos Diretos.<br>
+        - Pronome <strong>LHE / LHES</strong> substitui Objeto Indireto (complementa verbo que pede preposição <em>a</em>).
+      </div>
+      <div class="question-block">
+        <p>Ao substituir os termos sublinhados na frase <em>"Respeitei <u>o professor</u> e obedeci <u>ao professor</u>"</em>, a forma gramatical correta é:</p>
+        <div class="options">
+          <label><input type="radio" name="q17" value="A"> Respeitei-lhe e obedeci-lhe.</label>
+          <label><input type="radio" name="q17" value="B"> Respeitei-o e obedeci-lhe.</label>
+          <label><input type="radio" name="q17" value="C"> Respeitei-o e obedeci-o.</label>
+        </div>
+      </div>
+      <button onclick="checkR17()">Enviar Resposta</button>
+      <div id="fb-17" class="feedback"></div>
+    </div>
+
+    <!-- SALA 18 -->
+    <div id="room-18" class="room">
+      <h2>SALA 18: LHE com Valor Possessivo (Adjunto Adnominal)</h2>
+      <div class="theory-box">
+        <h4>📘 Conceito Teórico:</h4>
+        O pronome oblíquo <em>lhe</em> pode exercer função sintática de <strong>Adjunto Adnominal</strong> quando equivale a um pronome possessivo (ex: "Roubaram-lhe a carteira" = Roubaram a carteira <em>dele</em>).
+      </div>
+      <div class="question-block">
+        <p>Na frase <em>"O vento forte secou-<u>lhe</u> as lágrimas"</em>, o pronome destacado funciona sintaticamente como:</p>
+        <div class="options">
+          <label><input type="radio" name="q18" value="A"> Objeto Indireto.</label>
+          <label><input type="radio" name="q18" value="B"> Adjunto Adnominal (ideia de posse: 'lágrimas dele/dela').</label>
+          <label><input type="radio" name="q18" value="C"> Complemento Nominal.</label>
+        </div>
+      </div>
+      <button onclick="checkR18()">Enviar Resposta</button>
+      <div id="fb-18" class="feedback"></div>
+    </div>
+
+    <!-- SALA 19 -->
+    <div id="room-19" class="room">
+      <h2>SALA 19: Orações Coordenadas Sindéticas (Conjunções Adversativas)</h2>
+      <div class="theory-box">
+        <h4>📘 Conceito Teórico:</h4>
+        Orações coordenadas adversativas exprimem oposição/contraste. Conjunções: <em>mas, porém, contudo, todavia, entretanto, no entanto</em>.
+      </div>
+      <div class="question-block">
+        <p>Assinale a conjunção que <strong>NÃO</strong> pode substituir a palavra 'porém' na frase <em>"Estudou muito, porém não passou"</em> sem alterar o sentido:</p>
+        <div class="options">
+          <label><input type="radio" name="q19" value="A"> contudo</label>
+          <label><input type="radio" name="q19" value="B"> todavia</label>
+          <label><input type="radio" name="q19" value="C"> portanto (conjunção conclusiva)</label>
+        </div>
+      </div>
+      <button onclick="checkR19()">Enviar Resposta</button>
+      <div id="fb-19" class="feedback"></div>
+    </div>
+
+    <!-- SALA 20 -->
+    <div id="room-20" class="room">
+      <h2>SALA 20: Oração Subordinada Substantiva Subjetiva</h2>
+      <div class="theory-box">
+        <h4>📘 Conceito Teórico:</h4>
+        A Oração Subordinada Substantiva Subjetiva funciona como <strong>sujeito</strong> do verbo da oração principal (que geralmente vem na 3ª pessoa do singular). Ex: "É necessário <em>que você estude</em>".
+      </div>
+      <div class="question-block">
+        <p>Classifique a oração sublinhada: <em>"É fundamental <u>que todos compareçam à aula</u>"</em>.</p>
+        <input type="text" id="in-20" placeholder="Digite o nome completo da oração..." />
+      </div>
+      <button onclick="checkR20()">Enviar Resposta</button>
+      <div id="fb-20" class="feedback"></div>
+    </div>
+
+    <!-- SALA 21 -->
+    <div id="room-21" class="room">
+      <h2>SALA 21: Oração Subordinada Substantiva Objetiva Direta vs. Indireta</h2>
+      <div class="theory-box">
+        <h4>📘 Conceito Teórico:</h4>
+        - <strong>Objetiva Direta:</strong> Funciona como OD do verbo principal (ex: "Desejo que venças").<br>
+        - <strong>Objetiva Indireta:</strong> Funciona como OI do verbo principal, regida por preposição (ex: "Gosto de que me respeitem").
+      </div>
+      <div class="question-block">
+        <p>Na oração <em>"O professor necessita <u>de que os alunos enviem a tarefa</u>"</em>, a oração sublinhada é:</p>
+        <div class="options">
+          <label><input type="radio" name="q21" value="A"> Subordinada Substantiva Objetiva Direta.</label>
+          <label><input type="radio" name="q21" value="B"> Subordinada Substantiva Objetiva Indireta (completa o VTI 'necessita').</label>
+          <label><input type="radio" name="q21" value="C"> Subordinada Substantiva Completiva Nominal.</label>
+        </div>
+      </div>
+      <button onclick="checkR21()">Enviar Resposta</button>
+      <div id="fb-21" class="feedback"></div>
+    </div>
+
+    <!-- SALA 22 -->
+    <div id="room-22" class="room">
+      <h2>SALA 22: Oração Subordinada Substantiva Completiva Nominal</h2>
+      <div class="theory-box">
+        <h4>📘 Conceito Teórico:</h4>
+        Diferente da Objetiva Indireta (que completa um verbo), a Completiva Nominal completa o sentido de um <strong>Substantivo Abstrato, Adjetivo ou Advérbio</strong> da oração principal.
+      </div>
+      <div class="question-block">
+        <p>A oração <em>"Tenho certeza <u>de que seremos aprovados</u>"</em> é completiva nominal porque completa o sentido de:</p>
+        <div class="options">
+          <label><input type="radio" name="q22" value="A"> Um verbo transitivo indireto.</label>
+          <label><input type="radio" name="q22" value="B"> Do substantivo abstrato 'certeza'.</label>
+          <label><input type="radio" name="q22" value="C"> Do sujeito da oração.</label>
+        </div>
+      </div>
+      <button onclick="checkR22()">Enviar Resposta</button>
+      <div id="fb-22" class="feedback"></div>
+    </div>
+
+    <!-- SALA 23 -->
+    <div id="room-23" class="room">
+      <h2>SALA 23: Oração Adjetiva Explicativa vs. Restritiva</h2>
+      <div class="theory-box">
+        <h4>📘 Conceito Teórico:</h4>
+        - <strong>Explicativa:</strong> Vem entre vírgulas e atribui uma qualidade geral/própria do todo.<br>
+        - <strong>Restritiva:</strong> Sem vírgulas, limita/restringe o sentido do substantivo a um grupo específico.
+      </div>
+      <div class="question-block">
+        <p>Na frase <em>"Os alunos <u>que estudaram</u> passaram no exame"</em> (sem vírgulas), entende-se que:</p>
+        <div class="options">
+          <label><input type="radio" name="q23" value="A"> Todos os alunos passaram no exame.</label>
+          <label><input type="radio" name="q23" value="B"> Apenas o grupo específico de alunos que estudou passou (sentido restritivo).</label>
+          <label><input type="radio" name="q23" value="C"> Nenhum aluno passou no exame.</label>
+        </div>
+      </div>
+      <button onclick="checkR23()">Enviar Resposta</button>
+      <div id="fb-23" class="feedback"></div>
+    </div>
+
+    <!-- SALA 24 -->
+    <div id="room-24" class="room">
+      <h2>SALA 24: Pronome Relativo e Regência na Oração Adjetiva</h2>
+      <div class="theory-box">
+        <h4>📘 Conceito Teórico:</h4>
+        Se a oração adjetiva possuir um verbo que exige preposição, essa preposição deve ser deslocada para <strong>antes</strong> do pronome relativo. Ex: "O livro <em>de que</em> gosto" (gostar exige 'de').
+      </div>
+      <div class="question-block">
+        <p>Assinale a frase em que a regência do pronome relativo está <strong>correta</strong> segundo a norma-padrão:</p>
+        <div class="options">
+          <label><input type="radio" name="q24" value="A"> O filme que eu simpatizei ganhou prêmios.</label>
+          <label><input type="radio" name="q24" value="B"> A cidade a que fomos é acolhedora (ir exige a preposição 'a').</label>
+          <label><input type="radio" name="q24" value="C"> A lei que nós obedecemos mudou.</label>
+        </div>
+      </div>
+      <button onclick="checkR24()">Enviar Resposta</button>
+      <div id="fb-24" class="feedback"></div>
+    </div>
+
+    <!-- SALA 25 -->
+    <div id="room-25" class="room">
+      <h2>SALA 25: Função Sintática do Pronome Relativo QUE</h2>
+      <div class="theory-box">
+        <h4>📘 Conceito Teórico:</h4>
+        Para descobrir a função sintática do pronome relativo <em>QUE</em>, substitua-o pelo seu antecedente na oração subordinada. Ex: "O aluno [que falou] saiu" $\rightarrow$ "O aluno falou" ($QUE = Sujeito$).
+      </div>
+      <div class="question-block">
+        <p>Na frase <em>"Os livros <u>que</u> comprei são excelentes"</em>, o pronome relativo <strong>que</strong> exerce a função de:</p>
+        <div class="options">
+          <label><input type="radio" name="q25" value="A"> Sujeito.</label>
+          <label><input type="radio" name="q25" value="B"> Objeto Direto (comprei os livros).</label>
+          <label><input type="radio" name="q25" value="C"> Predicativo do Sujeito.</label>
+        </div>
+      </div>
+      <button onclick="checkR25()">Enviar Resposta</button>
+      <div id="fb-25" class="feedback"></div>
+    </div>
+
+    <!-- SALA 26 -->
+    <div id="room-26" class="room">
+      <h2>SALA 26: Orações Adverbiais Causal vs. Consecutiva</h2>
+      <div class="theory-box">
+        <h4>📘 Conceito Teórico:</h4>
+        - <strong>Causal:</strong> Indica o motivo do fato da oração principal (ex: "Não foi à aula <em>porque</em> adoeceu").<br>
+        - <strong>Consecutiva:</strong> Indica a consequência/efeito do fato da oração principal (ex: "Falou tanto <em>que</em> ficou rouco").
+      </div>
+      <div class="question-block">
+        <p>Classifique a oração sublinhada: <em>"Tamanho foi o susto <u>que ela gritou alto</u>"</em>.</p>
+        <div class="options">
+          <label><input type="radio" name="q26" value="A"> Oração Subordinada Adverbial Causal.</label>
+          <label><input type="radio" name="q26" value="B"> Oração Subordinada Adverbial Consecutiva (expressa o resultado/consequência).</label>
+          <label><input type="radio" name="q26" value="C"> Oração Subordinada Adverbial Concessiva.</label>
+        </div>
+      </div>
+      <button onclick="checkR26()">Enviar Resposta</button>
+      <div id="fb-26" class="feedback"></div>
+    </div>
+
+    <!-- SALA 27 -->
+    <div id="room-27" class="room">
+      <h2>SALA 27: Oração Adverbial Concessiva (Exigência do Subjuntivo)</h2>
+      <div class="theory-box">
+        <h4>📘 Conceito Teórico:</h4>
+        A Oração Concessiva indica uma ideia de oposição ou obstáculo que <strong>não impede</strong> a realização do fato principal. Conjunções: <em>embora, ainda que, mesmo que, conquanto</em>. Exige verbo no Modo Subjuntivo.
+      </div>
+      <div class="question-block">
+        <p>Em <em>"<u>Embora chovesse muito</u>, fomos ao parque"</em>, a oração sublinhada expressa ideia de:</p>
+        <div class="options">
+          <label><input type="radio" name="q27" value="A"> Condição.</label>
+          <label><input type="radio" name="q27" value="B"> Concessão (contraste que não anula a oração principal).</label>
+          <label><input type="radio" name="q27" value="C"> Causa.</label>
+        </div>
+      </div>
+      <button onclick="checkR27()">Enviar Resposta</button>
+      <div id="fb-27" class="feedback"></div>
+    </div>
+
+    <!-- SALA 28 -->
+    <div id="room-28" class="room">
+      <h2>SALA 28: Orações Reduzidas de Infinitivo, Gerúndio e Particípio</h2>
+      <div class="theory-box">
+        <h4>📘 Conceito Teórico:</h4>
+        Orações reduzidas não são introduzidas por conectivo/conjunção e apresentam o verbo nas formas nominais (Infinitivo, Gerúndio ou Particípio).
+      </div>
+      <div class="question-block">
+        <p>Ao desenvolver a oração reduzida <em>"<u>Ao terminar a prova</u>, o candidato saiu"</em>, obtém-se a oração adverbial com valor de:</p>
+        <div class="options">
+          <label><input type="radio" name="q28" value="A"> Tempo ("Quando terminou a prova...").</label>
+          <label><input type="radio" name="q28" value="B"> Causa.</label>
+          <label><input type="radio" name="q28" value="C"> Modo.</label>
+        </div>
+      </div>
+      <button onclick="checkR28()">Enviar Resposta</button>
+      <div id="fb-28" class="feedback"></div>
+    </div>
+
+    <!-- SALA 29 -->
+    <div id="room-29" class="room">
+      <h2>SALA 29: Próclise, Mesóclise e Êclise (Colocação Pronominal)</h2>
+      <div class="theory-box">
+        <h4>📘 Conceito Teórico:</h4>
+        - Palavras atrativas (palavras negativas, advérbios, pronomes relativos/subordinativos) exigem <strong>Próclise</strong>.<br>
+        - Verbo no Futuro sem palavra atrativa exige <strong>Mesóclise</strong>.<br>
+        - Nunca se inicia oração com pronome oblíquo na norma-padrão.
+      </div>
+      <div class="question-block">
+        <p>Assinale a alternativa que apresenta erro de colocação pronominal segundo a norma culta:</p>
+        <div class="options">
+          <label><input type="radio" name="q29" value="A"> Não me disseram a verdade.</label>
+          <label><input type="radio" name="q29" value="B"> Me falaram sobre o adiamento do exame.</label>
+          <label><input type="radio" name="q29" value="C"> Dir-lhe-ei toda a verdade amanhã.</label>
+        </div>
+      </div>
+      <button onclick="checkR29()">Enviar Resposta</button>
+      <div id="fb-29" class="feedback"></div>
+    </div>
+
+    <!-- SALA 30 -->
+    <div id="room-30" class="room">
+      <h2>SALA 30: Análise Morfossintática Completa (O Desafio Final)</h2>
+      <div class="theory-box">
+        <h4>📘 Conceito Teórico Avançado:</h4>
+        Analise a frase de estilo dos vestibulares: <em>"É necessário que se preservem as memórias dos nossos ancestrais."</em>
+      </div>
+      <div class="question-block">
+        <p><strong>Desafio Final:</strong> Identifique a função da oração <em>"que se preservem as memórias..."</em> e a função sintática do termo <em>"as memórias"</em> na voz passiva sintética:</p>
+        <div class="options">
+          <label><input type="radio" name="q30" value="A"> Oração Subordinada Substantiva Subjetiva; "as memórias" é Sujeito Paciente.</label>
+          <label><input type="radio" name="q30" value="B"> Oração Subordinada Substantiva Objetiva Direta; "as memórias" é Objeto Direto.</label>
+          <label><input type="radio" name="q30" value="C"> Oração Subordinada Adjetiva Restritiva; "as memórias" é Agente da Passiva.</label>
+        </div>
+      </div>
+      <button onclick="checkR30()">Desativar Sistema e Escapar</button>
+      <div id="fb-30" class="feedback"></div>
+    </div>
+
+    <!-- VITÓRIA -->
     <div id="room-victory" class="room">
-      <h2 style="color: var(--success); font-size: 2rem;">🏆 DESAFIO CONCLUÍDO! SISTEMA RESTAURADO!</h2>
-      <p style="font-size: 1.2rem;">Parabéns! Superou com êxito os 12 setores do arquivo histórico do Brasil!</p>
+      <h2 style="color: var(--success); font-size: 2rem;">🏆 DESAFIO CONCLUÍDO! MESTRE DA MORFOSSINTAXE!</h2>
+      <p style="font-size: 1.2rem;">Parabéns! Você percorreu todas as 30 salas e dominou a análise morfossintática para qualquer vestibular!</p>
       
       <div class="question-block" style="text-align: center;">
-        <p><strong>Classificação Final:</strong></p>
-        <p style="font-size: 1.5rem; color: var(--blue);">🎖️ Historiador de Elite & Mestre do Tempo</p>
+        <p><strong>Status Final do Candidato:</strong></p>
+        <p style="font-size: 1.6rem; color: var(--purple);">🎓 Nível Gabarito: Aprovado nas Grandes Bancas!</p>
         <p><strong>Tempo Restante:</strong> <span id="final-time" style="color: var(--accent); font-weight: bold; font-size: 1.4rem;"></span></p>
       </div>
     </div>
@@ -335,7 +745,7 @@
       
       if (timeLeft <= 0) {
         clearInterval(countdown);
-        alert('Tempo Esgotado! O sistema foi bloqueado. Recarregue a página para tentar novamente.');
+        alert('Tempo Esgotado! O sistema travou. Recarregue a página para reiniciar o simulado.');
         location.reload();
       }
       timeLeft--;
@@ -346,18 +756,24 @@
       fb.className = isError ? 'feedback error' : 'feedback';
       let content = `<strong>${text}</strong>`;
       if (hint && isError) {
-        content += `<div class="hint">💡 <strong>Dica de Pesquisa:</strong> ${hint}</div>`;
+        content += `<div class="hint">💡 <strong>Dica Pedagógica:</strong> ${hint}</div>`;
       }
       fb.innerHTML = content;
     }
 
+    function updateProgress(roomNum) {
+      const percent = (roomNum / 30) * 100;
+      document.getElementById('progress-bar').style.width = `${percent}%`;
+    }
+
     function triggerLevelUp(currentRoom, nextRoomNum, levelTitle, rewardTitle, msg) {
       document.getElementById(`room-${currentRoom}`).classList.remove('active');
-      document.getElementById('current-level').textContent = levelTitle;
+      document.getElementById('current-level').textContent = `Sala ${nextRoomNum === 'victory' ? 30 : nextRoomNum} de 30`;
       document.getElementById('reward-title').textContent = rewardTitle;
       document.getElementById('level-msg').textContent = msg;
       document.getElementById('level-modal').style.display = 'block';
       targetRoomAfterModal = nextRoomNum;
+      if (nextRoomNum !== 'victory') updateProgress(nextRoomNum);
     }
 
     function continueToNextRoom() {
@@ -369,123 +785,215 @@
       }
     }
 
-    // VALIDAÇÕES
-    function checkRoom1() {
+    // VALIDAÇÕES DAS 30 SALAS
+    function checkR1() {
       const q = document.querySelector('input[name="q1"]:checked');
-      if (!q) { showFeedback('feedback-1', 'Selecione uma opção!', true); return; }
-      if (q.value === 'B') {
-        triggerLevelUp(1, 2, 'Sala 2 de 12 - Conhecedor do Açúcar', '📜 Pergaminho do Escambo', 'Compreendeu o contacto inicial e o impacto da colonização!');
-      } else {
-        showFeedback('feedback-1', 'Resposta Incorreta!', true, 'O escambo não envolvia moedas de ouro; consistia na troca de pau-brasil por objetos de metal e machados.');
-      }
+      if(!q) return showFeedback('fb-1', 'Selecione uma opção!');
+      if(q.value === 'B') triggerLevelUp(1, 2, 'Iniciante', '🥉 Insígnia do Substantivo', 'Excelente! Tanto construção quanto beleza dependem de algo para existir.');
+      else showFeedback('fb-1', 'Incorreto!', true, 'Construção vem do verbo construir (ação) e beleza é qualidade. Ambos dependem de um ser para existir.');
     }
 
-    function checkRoom2() {
-      const tf1 = document.getElementById('tf1').value;
-      const tf2 = document.getElementById('tf2').value;
-      const tf3 = document.getElementById('tf3').value;
-      if (tf1 === 'V' && tf2 === 'V' && tf3 === 'F') {
-        triggerLevelUp(2, 3, 'Sala 3 de 12 - Navegador Atlântico', '⚓ Bússola das Rotas Coloniais', 'Análise correta da estrutura açucareira e das Câmaras Municipais!');
-      } else {
-        showFeedback('feedback-2', 'Sua combinação contém erros!', true, 'Atenção ao item 3: Os Senhores de Engenho ocupavam o cargo de "Homens-Bons" e dominavam as Câmaras Municipais.');
-      }
+    function checkR2() {
+      const q = document.querySelector('input[name="q2"]:checked');
+      if(!q) return showFeedback('fb-2', 'Selecione uma opção!');
+      if(q.value === 'B') triggerLevelUp(2, 3, 'Iniciante', '📜 Pergaminho das Classes', 'Correto! Os artigos "Os" e "o" substantivaram o adjetivo e o verbo.');
+      else showFeedback('fb-2', 'Incorreto!', true, 'Quando antecedidos por artigo, adjetivos e verbos passam a funcionar como substantivos.');
     }
 
-    function checkRoom3() {
-      const input = document.getElementById('poet-input').value.trim().toLowerCase();
-      if (input.includes('castro alves')) {
-        triggerLevelUp(3, 4, 'Sala 4 de 12 - Defensor da Liberdade', '🕊️ Lira Condoreira', 'A poética de Castro Alves denunciou a tragédia dos navios tumbeiros!');
-      } else {
-        showFeedback('feedback-3', 'Acesso Negado!', true, 'Pesquise pelo "Poeta dos Escravos", autor de "O Navio Negreiro" e "Vozes d’África".');
-      }
+    function checkR3() {
+      const q = document.querySelector('input[name="q3"]:checked');
+      if(!q) return showFeedback('fb-3', 'Selecione uma opção!');
+      if(q.value === 'A') triggerLevelUp(3, 4, 'Aprendiz', '🏷️ Lupa Pronominal', 'Correto! "Este" acompanha "livro" (adjetivo) e "seu" substitui "livro" (substantivo).');
+      else showFeedback('fb-3', 'Incorreto!', true, '"Este" está junto do substantivo livro; "seu" está sozinho substituindo o substantivo.');
     }
 
-    function checkRoom4() {
+    function checkR4() {
       const q = document.querySelector('input[name="q4"]:checked');
-      if (!q) { showFeedback('feedback-4', 'Selecione uma opção!', true); return; }
-      if (q.value === 'A') {
-        triggerLevelUp(4, 5, 'Sala 5 de 12 - Guardião de Palmares', '🛡️ Escudo de Zumbi', 'Identificou a estratégia sertanista utilizada contra os quilombos.');
-      } else {
-        showFeedback('feedback-4', 'Resposta Incorreta!', true, 'A Coroa contratou o bandeirante paulista Domingos Jorge Velho para certificar o cerco e a destruição de Palmares em 1694.');
-      }
+      if(!q) return showFeedback('fb-4', 'Selecione uma opção!');
+      if(q.value === 'B') triggerLevelUp(4, 5, 'Aprendiz', '⚙️ Engrenagem dos Advérbios', 'Correto! "Bastante" modifica o verbo estudaram, sendo invariável.');
+      else showFeedback('fb-4', 'Incorreto!', true, 'Nas opções A e C, "bastantes" está no plural acompanhando substantivo, logo é pronome adjetivo.');
     }
 
-    function checkRoom5() {
-      const input = document.getElementById('tax-input').value.trim().toLowerCase();
-      if (input.includes('derrama')) {
-        triggerLevelUp(5, 6, 'Sala 6 de 12 - Auditor do Império', '⚖️ Balança das Minas', 'A derrama provocou a revolta e serviu de estopim para a Inconfidência Mineira!');
-      } else {
-        showFeedback('feedback-5', 'Resposta Incorreta!', true, 'Qual era o nome do mecanismo de cobrança forçada quando a quota anual de 100 arrobas de ouro não era atingida?');
-      }
+    function checkR5() {
+      const q = document.querySelector('input[name="q5"]:checked');
+      if(!q) return showFeedback('fb-5', 'Selecione uma opção!');
+      if(q.value === 'B') triggerLevelUp(5, 6, 'Estudante de Sintaxe', '🔍 Detector de Sujeito', 'Correto! Verbo na 3ª p. plural sem contexto indetermina o sujeito.');
+      else showFeedback('fb-5', 'Incorreto!', true, 'Quando não há um contexto prévio indicando quem "anunciou", o sujeito é Indeterminado.');
     }
 
-    function checkRoom6() {
-      const input = document.getElementById('laws-input').value.trim().toUpperCase();
-      if (input === 'EUSEBIO-VENTRE-SEXA-AUREA') {
-        triggerLevelUp(6, 7, 'Sala 7 de 12 - Jurista da Abolição', '📜 Carta da Liberdade', 'Cronologia das Leis Abolicionistas validada!');
-      } else {
-        showFeedback('feedback-6', 'Sequência incorreta!', true, 'Pesquise os anos: Eusébio de Queirós (1850), Ventre Livre (1871), Sexagenários (1885) e Áurea (1888).');
-      }
+    function checkR6() {
+      const q = document.querySelector('input[name="q6"]:checked');
+      if(!q) return showFeedback('fb-6', 'Selecione uma opção!');
+      if(q.value === 'B') triggerLevelUp(6, 7, 'Estudante de Sintaxe', '⚖️ Selo da Impessoalidade', 'Correto! O verbo Haver no sentido de ocorrer é impessoal: "Houve muitos acidentes".');
+      else showFeedback('fb-6', 'Incorreto!', true, 'O verbo haver no sentido de existir/ocorrer não vai para o plural.');
     }
 
-    function checkRoom7() {
+    function checkR7() {
       const q = document.querySelector('input[name="q7"]:checked');
-      if (!q) { showFeedback('feedback-7', 'Selecione uma opção!', true); return; }
-      if (q.value === 'B') {
-        triggerLevelUp(7, 8, 'Sala 8 de 12 - Analista da República', '🏙️ Chave do Século XX', 'Análise estrutural do Pós-Abolição e da política de atração da imigração europeia correta!');
-      } else {
-        showFeedback('feedback-7', 'Resposta Incorreta!', true, 'Não houve distribuição de terras nem indenização aos libertos; o Estado optou por financiar a chegada de imigrantes europeus.');
-      }
+      if(!q) return showFeedback('fb-7', 'Selecione uma opção!');
+      if(q.value === 'B') triggerLevelUp(7, 8, 'Praticante', '🔗 Conector de Transitividade', 'Correto! Quem confia, confia EM algo (exige a preposição em).');
+      else showFeedback('fb-7', 'Incorreto!', true, 'A presença da preposição "nos" (em + os) indica transitividade indireta.');
     }
 
-    function checkRoom8() {
-      const input = document.getElementById('alliance-input').value.trim().toLowerCase();
-      if (input.includes('alianca liberal') || input.includes('aliança liberal')) {
-        triggerLevelUp(8, 9, 'Sala 9 de 12 - Articulador de 1930', '🏛️ Selo da Revolução de 30', 'A Aliança Liberal uniu Minas Gerais, Rio Grande do Sul e Paraíba!');
-      } else {
-        showFeedback('feedback-8', 'Resposta Incorreta!', true, 'Pesquise qual foi a aliança opositora formada para a candidatura de Getúlio Vargas e João Pessoa em 1930.');
-      }
+    function checkR8() {
+      const val = document.getElementById('in-8').value.trim().toLowerCase();
+      if(val === 'ao melhor aluno') triggerLevelUp(8, 9, 'Praticante', '🎁 Emblema da Bitransitividade', 'Correto! "o prêmio" é OD e "ao melhor aluno" é OI.');
+      else showFeedback('fb-8', 'Incorreto!', true, 'Digite exatamente o termo regido por preposição que indica quem recebeu o prêmio.');
     }
 
-    function checkRoom9() {
-      const tf1 = document.getElementById('tf_v1').value;
-      const tf2 = document.getElementById('tf_v2').value;
-      const tf3 = document.getElementById('tf_v3').value;
-      if (tf1 === 'V' && tf2 === 'F' && tf3 === 'V') {
-        triggerLevelUp(9, 10, 'Sala 10 de 12 - Estrategista dos Anos 30', '📡 Antena do Estado Sítio', 'Identificou a oposição entre Integralistas (fascistas) e Aliança Nacional Libertadora (antifascista)!');
-      } else {
-        showFeedback('feedback-9', 'Combinação Incorreta!', true, 'Atenção ao item 2: A ANL (Aliança Nacional Libertadora) era uma frente antifascista e de esquerda, oposta ao fascismo.');
-      }
+    function checkR9() {
+      const q = document.querySelector('input[name="q9"]:checked');
+      if(!q) return showFeedback('fb-9', 'Selecione uma opção!');
+      if(q.value === 'B') triggerLevelUp(9, 10, 'Analista Sintático', '🎯 Bússola do Predicativo', 'Correto! "entusiasmados" caracteriza o objeto direto "os estudantes".');
+      else showFeedback('fb-9', 'Incorreto!', true, 'Quem estavam entusiasmados eram os estudantes (objeto direto da oração).');
     }
 
-    function checkRoom10() {
-      const input = document.getElementById('cohen-input').value.trim().toLowerCase();
-      if (input.includes('plano cohen') || input.includes('cohen')) {
-        triggerLevelUp(10, 11, 'Sala 11 de 12 - Decodificador do Estado Novo', '🔒 Dossiê da Ditadura', 'O Plano Cohen foi a farsa que justificou o golpe de 10 de novembro de 1937!');
-      } else {
-        showFeedback('feedback-10', 'Resposta Incorreta!', true, 'Pesquise pelo documento forjado pelo Capitão Olímpio Mourão Filho alegando uma insurreição comunista.');
-      }
+    function checkR10() {
+      const q = document.querySelector('input[name="q10"]:checked');
+      if(!q) return showFeedback('fb-10', 'Selecione uma opção!');
+      if(q.value === 'C') triggerLevelUp(10, 11, 'Analista Sintático', '📊 Tabela dos Predicados', 'Correto! Temos verbo de ação (chegaram) + predicativo do sujeito (exaustos).');
+      else showFeedback('fb-10', 'Incorreto!', true, 'Há dois núcleos: a ação de chegar e o estado de estar exausto.');
     }
 
-    function checkRoom11() {
+    function checkR11() {
       const q = document.querySelector('input[name="q11"]:checked');
-      if (!q) { showFeedback('feedback-11', 'Selecione uma opção!', true); return; }
-      if (q.value === 'B') {
-        triggerLevelUp(11, 12, 'Sala 12 de 12 - Crítico do Trabalhismo', '📻 Microfone do Estado Novo', 'O DIP controlava a censura e a imagem de Vargas como o "Pai dos Pobres"!');
-      } else {
-        showFeedback('feedback-11', 'Resposta Incorreta!', true, 'O órgão responsável pela propaganda oficial e censura era o DIP (Departamento de Imprensa e Propaganda).');
-      }
+      if(!q) return showFeedback('fb-11', 'Selecione uma opção!');
+      if(q.value === 'A') triggerLevelUp(11, 12, 'Especialista em Nominais', '🛡️ Escudo Adnominal', 'Correto! O aluno realiza a leitura (sentido ativo = adjunto adnominal).');
+      else showFeedback('fb-11', 'Incorreto!', true, 'Se o termo preposicionado executa a ação do substantivo, é Adjunto Adnominal.');
     }
 
-    function checkRoom12() {
-      const q = document.querySelector('input[name="q12"]:checked');
-      if (!q) { showFeedback('feedback-12', 'Selecione uma opção!', true); return; }
-      if (q.value === 'A') {
+    function checkR12() {
+      const val = document.getElementById('in-12').value.trim().toLowerCase();
+      if(val.includes('complemento nominal')) triggerLevelUp(12, 13, 'Especialista em Nominais', '📐 Esquadro do Complemento', 'Correto! Termo que completa adjetivo é sempre Complemento Nominal.');
+      else showFeedback('fb-12', 'Incorreto!', true, 'Qual é a função do termo que completa o sentido do adjetivo "confiantes"?');
+    }
+
+    function checkR13() {
+      const q = document.querySelector('input[name="q13"]:checked');
+      if(!q) return showFeedback('fb-13', 'Selecione uma opção!');
+      if(q.value === 'B') triggerLevelUp(13, 14, 'Avaliador de Textos', '✍️ Pena do Aposto', 'Correto! "Machado de Assis" especifica qual é o escritor sem pausas.');
+      else showFeedback('fb-13', 'Incorreto!', true, 'Como não há vírgulas e o nome restringe/especifica o substantivo comum, é aposto especificativo.');
+    }
+
+    function checkR14() {
+      const q = document.querySelector('input[name="q14"]:checked');
+      if(!q) return showFeedback('fb-14', 'Selecione uma opção!');
+      if(q.value === 'B') triggerLevelUp(14, 15, 'Avaliador de Textos', '📢 Megafone do Vocativo', 'Correto! O vocativo "Jovens" deve ser isolado por vírgula.');
+      else showFeedback('fb-14', 'Incorreto!', true, 'O vocativo exige pontuação isolando-o do restante da oração.');
+    }
+
+    function checkR15() {
+      const val = document.getElementById('in-15').value.trim().toLowerCase();
+      if(val.includes('agente da passiva')) triggerLevelUp(15, 16, 'Mestre das Vozes', '🗝️ Chave da Voz Passiva', 'Correto! É o termo que pratica a ação na voz passiva analítica.');
+      else showFeedback('fb-15', 'Incorreto!', true, 'Digite o nome da função do termo que realiza a ação na voz passiva.');
+    }
+
+    function checkR16() {
+      const q = document.querySelector('input[name="q16"]:checked');
+      if(!q) return showFeedback('fb-16', 'Selecione uma opção!');
+      if(q.value === 'B') triggerLevelUp(16, 17, 'Mestre das Vozes', '🧪 Reator da Partícula SE', 'Correto! Com VTI (Tratar de), o SE é Índice de Indeterminação do Sujeito.');
+      else showFeedback('fb-16', 'Incorreto!', true, 'Verbos transitivos indiretos acompanhados de SE não vão para o plural; o SE indetermina o sujeito.');
+    }
+
+    function checkR17() {
+      const q = document.querySelector('input[name="q17"]:checked');
+      if(!q) return showFeedback('fb-17', 'Selecione uma opção!');
+      if(q.value === 'B') triggerLevelUp(17, 18, 'Estrategista Pronominal', '🎯 Alvo dos Oblíquos', 'Correto! Respeitar é VTD (exige "o") e obedecer é VTI (exige "lhe").');
+      else showFeedback('fb-17', 'Incorreto!', true, 'Respeitar não pede preposição (respeitei-o); obedecer exige preposição a (obedeci-lhe).');
+    }
+
+    function checkR18() {
+      const q = document.querySelector('input[name="q18"]:checked');
+      if(!q) return showFeedback('fb-18', 'Selecione uma opção!');
+      if(q.value === 'B') triggerLevelUp(18, 19, 'Estrategista Pronominal', '💎 Insígnia da Posse Sintática', 'Correto! "secou-lhe as lágrimas" equivale a "secou as lágrimas dele/dela".');
+      else showFeedback('fb-18', 'Incorreto!', true, 'Quando o pronome oblíquo indica posse (equivale a dele/suas), atua como Adjunto Adnominal.');
+    }
+
+    function checkR19() {
+      const q = document.querySelector('input[name="q19"]:checked');
+      if(!q) return showFeedback('fb-19', 'Selecione uma opção!');
+      if(q.value === 'C') triggerLevelUp(19, 20, 'Navegador de Períodos', '🌉 Ponte da Coordenação', 'Correto! "Portanto" indica conclusão, não oposição/adversidade.');
+      else showFeedback('fb-19', 'Incorreto!', true, 'Contudo e todavia são conectivos adversativos equivalentes a porém.');
+    }
+
+    function checkR20() {
+      const val = document.getElementById('in-20').value.trim().toLowerCase();
+      if(val.includes('substantiva subjetiva')) triggerLevelUp(20, 21, 'Navegador de Períodos', '🏛️ Pilar da Subordinação', 'Correto! A oração exerce função de sujeito para "É fundamental".');
+      else showFeedback('fb-20', 'Incorreto!', true, 'Qual é o nome da oração subordinada que funciona como sujeito da oração principal?');
+    }
+
+    function checkR21() {
+      const q = document.querySelector('input[name="q21"]:checked');
+      if(!q) return showFeedback('fb-21', 'Selecione uma opção!');
+      if(q.value === 'B') triggerLevelUp(21, 22, 'Arquiteto de Orações', '🧱 Bloco das Substantivas', 'Correto! O verbo "necessita" é VTI e exige oração objetiva indireta.');
+      else showFeedback('fb-21', 'Incorreto!', true, 'A oração completa um verbo transitivo indireto (necessita DE que...).');
+    }
+
+    function checkR22() {
+      const q = document.querySelector('input[name="q22"]:checked');
+      if(!q) return showFeedback('fb-22', 'Selecione uma opção!');
+      if(q.value === 'B') triggerLevelUp(22, 23, 'Arquiteto de Orações', '🔍 Lupa da Completiva Nominal', 'Correto! "certeza" é um substantivo abstrato da oração principal.');
+      else showFeedback('fb-22', 'Incorreto!', true, 'A oração completa o substantivo abstrato "certeza", não um verbo.');
+    }
+
+    function checkR23() {
+      const q = document.querySelector('input[name="q23"]:checked');
+      if(!q) return showFeedback('fb-23', 'Selecione uma opção!');
+      if(q.value === 'B') triggerLevelUp(23, 24, 'Mestre das Adjetivas', '✂️ Tesoura da Restrição', 'Correto! A ausência de vírgulas restringe o sentido a apenas alguns alunos.');
+      else showFeedback('fb-23', 'Incorreto!', true, 'Orações adjetivas sem vírgulas são restritivas e limitam o grupo.');
+    }
+
+    function checkR24() {
+      const q = document.querySelector('input[name="q24"]:checked');
+      if(!q) return showFeedback('fb-24', 'Selecione uma opção!');
+      if(q.value === 'B') triggerLevelUp(24, 25, 'Mestre das Adjetivas', '🔗 Elo da Regência Relativa', 'Correto! Quem vai, vai A algum lugar ("a que fomos").');
+      else showFeedback('fb-24', 'Incorreto!', true, 'Simpatizar exige preposição COM e obedecer exige preposição A antes do relativo.');
+    }
+
+    function checkR25() {
+      const q = document.querySelector('input[name="q25"]:checked');
+      if(!q) return showFeedback('fb-25', 'Selecione uma opção!');
+      if(q.value === 'B') triggerLevelUp(25, 26, 'Especialista em Conectivos', '🔑 Chave do Pronome QUE', 'Correto! Reordenando: "comprei os livros" -> os livros é Objeto Direto.');
+      else showFeedback('fb-25', 'Incorreto!', true, 'Substitua "que" por "os livros" na oração "comprei [os livros]". O termo é Objeto Direto.');
+    }
+
+    function checkR26() {
+      const q = document.querySelector('input[name="q26"]:checked');
+      if(!q) return showFeedback('fb-26', 'Selecione uma opção!');
+      if(q.value === 'B') triggerLevelUp(26, 27, 'Especialista em Conectivos', '⚡ Raio da Consequência', 'Correto! O grito foi a consequência direta do tamanho do susto.');
+      else showFeedback('fb-26', 'Incorreto!', true, 'A estrutura "Tamanho... que" introduz a consequência (oração consecutiva).');
+    }
+
+    function checkR27() {
+      const q = document.querySelector('input[name="q27"]:checked');
+      if(!q) return showFeedback('fb-27', 'Selecione uma opção!');
+      if(q.value === 'B') triggerLevelUp(27, 28, 'Mestre das Adverbiais', '🛡️ Escudo da Concessão', 'Correto! A chuva foi um fato contrário que não impediu ir ao parque.');
+      else showFeedback('fb-27', 'Incorreto!', true, '"Embora" é a principal conjunção subordinativa concessiva.');
+    }
+
+    function checkR28() {
+      const q = document.querySelector('input[name="q28"]:checked');
+      if(!q) return showFeedback('fb-28', 'Selecione uma opção!');
+      if(q.value === 'A') triggerLevelUp(28, 29, 'Mestre das Adverbiais', '⏳ Ampulheta do Infinitivo', 'Correto! "Ao + Infinitivo" possui valor temporal (Quando terminou...).');
+      else showFeedback('fb-28', 'Incorreto!', true, 'A locução "Ao + Infinitivo" reduz uma oração subordinada adverbial temporal.');
+    }
+
+    function checkR29() {
+      const q = document.querySelector('input[name="q29"]:checked');
+      if(!q) return showFeedback('fb-29', 'Selecione uma opção!');
+      if(q.value === 'B') triggerLevelUp(29, 30, 'Candidato de Elite', '📜 Diploma da Colocação', 'Correto! Não se inicia frase com pronome oblíquo no registro culto.');
+      else showFeedback('fb-29', 'Incorreto!', true, 'Em "Me falaram...", há erro de próclise no início da frase.');
+    }
+
+    function checkR30() {
+      const q = document.querySelector('input[name="q30"]:checked');
+      if(!q) return showFeedback('fb-30', 'Selecione uma opção!');
+      if(q.value === 'A') {
         clearInterval(countdown);
         document.getElementById('final-time').textContent = timerElement.textContent;
-        triggerLevelUp(12, 'victory', 'Mestre Absoluto da História', '🏆 Troféu de Ouro da História', 'Você completou as 12 salas e decifrou toda a evolução histórica!');
+        triggerLevelUp(30, 'victory', 'Mestre Absoluto', '🏆 Troféu de Ouro da Morfossintaxe', 'Você gabaritou o enigma final com perfeição!');
       } else {
-        showFeedback('feedback-12', 'Resposta Incorreta!', true, 'A grande contradição do regime foi enviar a FEB para combater regimes ditatoriais na Europa enquanto mantinha a ditadura varguista no Brasil.');
+        showFeedback('fb-30', 'Incorreto!', true, '"É necessário" pede Oração Substantiva Subjetiva; em "preservem-se as memórias", o termo "as memórias" é o sujeito paciente.');
       }
     }
   </script>
